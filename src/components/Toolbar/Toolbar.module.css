@@ -219,8 +219,8 @@
 
 .fazierBadge img {
   display: block;
-  width: 120px;
-  height: auto;
+  width: 250px;
+  height: 54px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
 }
