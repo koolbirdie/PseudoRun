@@ -253,7 +253,8 @@ export default function Toolbar({
       >
         <img
           src={`https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=5789&badge_type=monthly&theme=${theme === 'dark' ? 'dark' : 'light'}`}
-          width={400}
+          width={250}
+          height={54}
           alt="Fazier badge"
         />
       </a>
