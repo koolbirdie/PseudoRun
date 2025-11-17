@@ -1471,6 +1471,45 @@ export class Interpreter {
     throw new RuntimeError(`Function '${node.name}' not found`, node.line);
   }
 
+  private evaluateAddressOf(node: AddressOfNode, context: ExecutionContext): number {
+    const address = this.variableAddresses.get(node.target.name);
+    if (address === undefined) {
+      throw new RuntimeError(`Variable '${node.target.name}' not found in memory`, node.line);
+    }
+    return address;
+  }
+
+  private evaluateDereference(node: DereferenceNode, context: ExecutionContext): any {
+    const pointerAddress = this.evaluateExpression(node.pointer, context);
+    if (typeof pointerAddress !== 'number') {
+      throw new RuntimeError(`Dereference requires pointer address`, node.line);
+    }
+
+    try {
+      return this.memory.read(pointerAddress);
+    } catch (error) {
+      throw new RuntimeError(`Memory read error at address 0x${pointerAddress.toString(16).toUpperCase()}: ${error.message}`, node.line);
+    }
+  }
+
+  private evaluateMemoryAllocation(node: MemoryAllocationNode, context: ExecutionContext): number {
+    const size = this.evaluateExpression(node.size, context);
+    if (typeof size !== 'number' || size <= 0) {
+      throw new RuntimeError(`MALLOC requires positive size`, node.line);
+    }
+
+    try {
+      const address = this.memory.allocate(size, node.targetType);
+      return address;
+    } catch (error) {
+      throw new RuntimeError(`Memory allocation error: ${error.message}`, node.line);
+    }
+  }
+
+  private evaluateSizeOf(node: SizeOfNode, context: ExecutionContext): number {
+    return this.memory.getTypeSize(node.dataType);
+  }
+
   private evaluateBuiltInFunction(name: string, args: ExpressionNode[], context: ExecutionContext, line: number): any {
     switch (name) {
       case 'LENGTH':
