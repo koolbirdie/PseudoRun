@@ -253,7 +253,30 @@ npm run dev
 # Open http://localhost:3000
 ```
 
-### Firebase Authentication Setup
+## 🔐 Authentication & Access Requirements
+
+### Quick Start (No Registration Required!)
+
+**🎉 GREAT NEWS!** All features including the new memory management system work immediately without registration:
+
+- ✅ **Full pseudocode execution** - Run any IGCSE/A-LEVELS program
+- ✅ **Memory debugging** - Complete pointer and memory visualization
+- ✅ **Real-time validation** - Syntax checking and error detection
+- ✅ **All examples** - Access 22 built-in example programs
+- ✅ **File operations** - Download/upload your code
+- ✅ **Auto-save** - Code persists in browser
+
+**Just visit the website and start coding!**
+
+### Optional Registration Benefits
+
+Create an account for additional cloud features:
+- ☁️ **Save programs online** - Access your code from any device
+- 📚 **Program library** - Manage and organize your saved programs
+- 🔗 **Share code** - Generate shareable links to your programs
+- 📧 **Email verification** - Full cloud synchronization
+
+### Firebase Authentication Setup (For Local Development)
 
 This application uses Firebase for user authentication. Follow these steps to set up:
 
