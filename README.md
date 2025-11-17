@@ -187,6 +187,11 @@ OUTPUT address         // Displays: 4096
 - `REAL(x)` - Converts to real number
 - `STRING(x)` - Converts to string
 
+**Memory Functions:**
+- `MALLOC(size)` - Allocates memory and returns pointer
+- `FREE(pointer)` - Deallocates dynamically allocated memory
+- `SIZE_OF(dataType)` - Returns size in bytes of data type
+
 **Math Functions:**
 - `ROUND(x, decimals)` - Rounds to decimal places
 - `RANDOM()` - Returns random 0.0 to 1.0
