@@ -28,6 +28,7 @@ import {
   LiteralNode,
   IdentifierNode,
   ArrayAccessNode,
+  DereferenceNode,
   DataType,
   Parameter
 } from './types';
