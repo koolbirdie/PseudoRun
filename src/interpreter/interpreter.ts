@@ -67,6 +67,8 @@ export class Interpreter {
   private fileHandles: Map<string, FileHandle> = new Map();
   private fileWriteOutput: boolean;
   private fileUploadHandler?: (filename: string) => Promise<string>;
+  private memory: MemoryEngine;
+  private variableAddresses: Map<string, number>;
 
   constructor(
     inputHandler?: (variableName: string, variableType: string) => Promise<string>,
