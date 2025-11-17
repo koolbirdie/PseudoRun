@@ -1502,7 +1502,7 @@ export class Interpreter {
     try {
       return this.memory.read(pointerAddress);
     } catch (error) {
-      throw new RuntimeError(`Memory read error at address 0x${pointerAddress.toString(16).toUpperCase()}: ${error.message}`, node.line);
+      throw new RuntimeError(`Memory read error at address 0x${pointerAddress.toString(16).toUpperCase()}: ${(error as Error).message}`, node.line);
     }
   }
 
