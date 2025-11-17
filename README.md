@@ -29,6 +29,16 @@
 - ✅ **22 Built-in Examples** - Learn from comprehensive sample programs
 - ✅ **Responsive Design** - Works on desktop, tablet, and mobile
 - ✅ **User Authentication** - Secure login with Google or Email/Password
+- ✅ **Guest Mode** - Try all features without signing up!
+
+### 🧠 Advanced Memory Management (NEW!)
+- ✅ **64KB Simulated RAM** - Low-level memory environment for algorithm research
+- ✅ **Pointer Operations** - Address-of (`&`) and dereference (`*`) operators
+- ✅ **Dynamic Memory** - `MALLOC()` and `FREE()` for heap allocation
+- ✅ **Memory Visualization** - Real-time memory state with hex dump view
+- ✅ **Operation Tracing** - Complete memory operation logging
+- ✅ **Type-Safe Pointers** - `POINTER_TO_INTEGER`, `POINTER_TO_REAL`, `POINTER_TO_CHAR`, `VOID_POINTER`
+- ✅ **Educational Debugging** - Perfect for learning low-level programming concepts
 
 ### 🎨 User Experience
 - 🖱️ **Split-view Editor** - Code on left, output on right
