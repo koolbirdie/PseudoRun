@@ -847,6 +847,25 @@ export class Interpreter {
     }
   }
 
+  private async* executeMemoryFree(node: MemoryFreeNode, context: ExecutionContext): AsyncGenerator<string, void, unknown> {
+    const pointerAddress = this.evaluateExpression(node.pointer, context);
+
+    if (typeof pointerAddress !== 'number') {
+      throw new RuntimeError(`FREE requires pointer address`, node.line);
+    }
+
+    if (pointerAddress === 0) {
+      throw new RuntimeError(`Cannot free null pointer`, node.line);
+    }
+
+    try {
+      this.memory.free(pointerAddress);
+      yield `Freed memory at address 0x${pointerAddress.toString(16).toUpperCase()}`;
+    } catch (error) {
+      throw new RuntimeError(`Memory free error: ${error.message}`, node.line);
+    }
+  }
+
   private async* executeProcedure(
     procedure: ProcedureNode,
     args: ExpressionNode[],
