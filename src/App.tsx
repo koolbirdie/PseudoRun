@@ -586,6 +586,7 @@ function App() {
         onOpenSyntaxReference={() => setShowSyntaxReference(true)}
         onOpenPracticeProblems={() => setShowPracticeProblems(true)}
         onOpenExamMode={() => setShowExamModeStart(true)}
+        onToggleMemoryView={handleToggleMemoryView}
         // onOpenLearningTools={() => setShowLearningTools(true)}
         isRunning={isRunning}
         examModeActive={examMode.active}
