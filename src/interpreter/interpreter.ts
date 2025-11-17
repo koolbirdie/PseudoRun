@@ -343,9 +343,9 @@ export class Interpreter {
       });
 
       this.setArrayElement(variable.value, indices, value, variable.dimensions!, node.line);
-    } else if (node.target.type === 'Dereference') {
+    } else if ((node.target as any).type === 'Dereference') {
       // Handle assignment through pointer dereference (*ptr = value)
-      const derefNode = node.target as any;
+      const derefNode = node.target as DereferenceNode;
       const pointerAddress = this.evaluateExpression(derefNode.pointer, context);
 
       if (typeof pointerAddress !== 'number') {
