@@ -130,6 +130,41 @@ INPUT variable
 OUTPUT expression, "text", variable
 ```
 
+### 🧠 Memory Management Operations (NEW!)
+
+#### Pointer Operations
+```pseudocode
+// Address-of and dereference
+DECLARE x : INTEGER
+DECLARE ptr : POINTER_TO_INTEGER
+ptr <-- &x        // Get memory address of x
+*ptr <-- 100      // Write value through pointer
+OUTPUT *ptr       // Read value through pointer
+```
+
+#### Dynamic Memory Allocation
+```pseudocode
+DECLARE dynamic : POINTER_TO_INTEGER
+dynamic <-- MALLOC(10)    // Allocate 10 bytes
+*dynamic <-- 42          // Write to allocated memory
+FREE(dynamic)            // Deallocate memory
+```
+
+#### Memory Size Information
+```pseudocode
+DECLARE size : INTEGER
+size <-- SIZE_OF(INTEGER)      // Get size of data type
+size <-- SIZE_OF(REAL)         // Get size of real
+size <-- SIZE_OF(POINTER_TO_INTEGER)  // Get pointer size
+```
+
+#### Hexadecimal Literals
+```pseudocode
+DECLARE address : INTEGER
+address <-- 0x1000     // Hexadecimal literal
+OUTPUT address         // Displays: 4096
+```
+
 ### 🧮 Operators
 
 **Arithmetic:** `+` `-` `*` `/` `DIV` `MOD`
