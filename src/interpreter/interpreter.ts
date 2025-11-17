@@ -1520,7 +1520,7 @@ export class Interpreter {
     }
   }
 
-  private evaluateSizeOf(node: SizeOfNode, context: ExecutionContext): number {
+  private evaluateSizeOf(node: SizeOfNode, _context: ExecutionContext): number {
     return this.memory.getTypeSize(node.dataType);
   }
 
