@@ -42,6 +42,7 @@ export default function Toolbar({
   onOpenSyntaxReference,
   onOpenPracticeProblems,
   onOpenExamMode,
+  onToggleMemoryView,
   // onOpenLearningTools,
   isRunning,
   examModeActive
