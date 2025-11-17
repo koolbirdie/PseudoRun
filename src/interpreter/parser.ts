@@ -28,6 +28,7 @@ import {
   LiteralNode,
   IdentifierNode,
   ArrayAccessNode,
+  DereferenceNode,
   DataType,
   Parameter
 } from './types';
@@ -192,8 +193,9 @@ export class Parser {
       }
     }
 
-    // Check for assignment
-    if (token.type === 'IDENTIFIER') {
+    // Check for assignment (including dereference assignments)
+    if (token.type === 'IDENTIFIER' ||
+        (token.type === 'OPERATOR' && token.value === '*')) {
       return this.parseAssignment();
     }
 
@@ -207,39 +209,51 @@ export class Parser {
   private parseAssignment(): AssignmentNode {
     const line = this.peek().line;
 
-    // Parse target (identifier or array access)
-    let target: IdentifierNode | ArrayAccessNode;
+    // Parse target (identifier, array access, or dereference)
+    let target: IdentifierNode | ArrayAccessNode | DereferenceNode;
 
-    const identifier = this.advance().value;
-
-    if (this.check('LBRACKET')) {
-      // Array access
-      this.advance(); // consume [
-      const indices: ExpressionNode[] = [];
-
-      do {
-        indices.push(this.parseExpression());
-        if (this.check('COMMA')) {
-          this.advance();
-        } else {
-          break;
-        }
-      } while (true);
-
-      this.consume('RBRACKET', 'Expected ] after array indices');
-
+    // Check for dereference operator
+    if (this.check('OPERATOR') && this.peek().value === '*') {
+      this.advance(); // consume *
+      const pointerExpr = this.parsePrimary();
       target = {
-        type: 'ArrayAccess',
-        array: identifier,
-        indices,
+        type: 'Dereference',
+        pointer: pointerExpr,
         line
       };
     } else {
-      target = {
-        type: 'Identifier',
-        name: identifier,
-        line
-      };
+      // Existing identifier/array access logic
+      const identifier = this.advance().value;
+
+      if (this.check('LBRACKET')) {
+        // Array access
+        this.advance(); // consume [
+        const indices: ExpressionNode[] = [];
+
+        do {
+          indices.push(this.parseExpression());
+          if (this.check('COMMA')) {
+            this.advance();
+          } else {
+            break;
+          }
+        } while (true);
+
+        this.consume('RBRACKET', 'Expected ] after array indices');
+
+        target = {
+          type: 'ArrayAccess',
+          array: identifier,
+          indices,
+          line
+        };
+      } else {
+        target = {
+          type: 'Identifier',
+          name: identifier,
+          line
+        };
+      }
     }
 
     this.consume('ASSIGNMENT', 'Expected <- in assignment');
@@ -276,40 +290,52 @@ export class Parser {
 
   private parseInput(): InputNode {
     const line = this.advance().line; // consume INPUT
-    
-    // Parse target (identifier or array access)
-    let target: IdentifierNode | ArrayAccessNode;
 
-    const identifier = this.consume('IDENTIFIER', 'Expected identifier after INPUT').value;
+    // Parse target (identifier, array access, or dereference)
+    let target: IdentifierNode | ArrayAccessNode | DereferenceNode;
 
-    if (this.check('LBRACKET')) {
-      // Array access
-      this.advance(); // consume [
-      const indices: ExpressionNode[] = [];
-
-      do {
-        indices.push(this.parseExpression());
-        if (this.check('COMMA')) {
-          this.advance();
-        } else {
-          break;
-        }
-      } while (true);
-
-      this.consume('RBRACKET', 'Expected ] after array indices');
-
+    // Check for dereference operator
+    if (this.check('OPERATOR') && this.peek().value === '*') {
+      this.advance(); // consume *
+      const pointerExpr = this.parsePrimary();
       target = {
-        type: 'ArrayAccess',
-        array: identifier,
-        indices,
+        type: 'Dereference',
+        pointer: pointerExpr,
         line
       };
     } else {
-      target = {
-        type: 'Identifier',
-        name: identifier,
-        line
-      };
+      // Existing identifier/array access logic
+      const identifier = this.consume('IDENTIFIER', 'Expected identifier after INPUT').value;
+
+      if (this.check('LBRACKET')) {
+        // Array access
+        this.advance(); // consume [
+        const indices: ExpressionNode[] = [];
+
+        do {
+          indices.push(this.parseExpression());
+          if (this.check('COMMA')) {
+            this.advance();
+          } else {
+            break;
+          }
+        } while (true);
+
+        this.consume('RBRACKET', 'Expected ] after array indices');
+
+        target = {
+          type: 'ArrayAccess',
+          array: identifier,
+          indices,
+          line
+        };
+      } else {
+        target = {
+          type: 'Identifier',
+          name: identifier,
+          line
+        };
+      }
     }
 
     return {
@@ -716,39 +742,51 @@ export class Parser {
 
     this.consume('COMMA', 'Expected , after filename in READFILE');
 
-    // Parse target (identifier or array access) - same as INPUT
-    let target: IdentifierNode | ArrayAccessNode;
+    // Parse target (identifier, array access, or dereference) - same as INPUT
+    let target: IdentifierNode | ArrayAccessNode | DereferenceNode;
 
-    const identifier = this.consume('IDENTIFIER', 'Expected identifier after , in READFILE').value;
-
-    if (this.check('LBRACKET')) {
-      // Array access
-      this.advance(); // consume [
-      const indices: ExpressionNode[] = [];
-
-      do {
-        indices.push(this.parseExpression());
-        if (this.check('COMMA')) {
-          this.advance();
-        } else {
-          break;
-        }
-      } while (true);
-
-      this.consume('RBRACKET', 'Expected ] after array indices');
-
+    // Check for dereference operator
+    if (this.check('OPERATOR') && this.peek().value === '*') {
+      this.advance(); // consume *
+      const pointerExpr = this.parsePrimary();
       target = {
-        type: 'ArrayAccess',
-        array: identifier,
-        indices,
+        type: 'Dereference',
+        pointer: pointerExpr,
         line
       };
     } else {
-      target = {
-        type: 'Identifier',
-        name: identifier,
-        line
-      };
+      // Existing identifier/array access logic
+      const identifier = this.consume('IDENTIFIER', 'Expected identifier after , in READFILE').value;
+
+      if (this.check('LBRACKET')) {
+        // Array access
+        this.advance(); // consume [
+        const indices: ExpressionNode[] = [];
+
+        do {
+          indices.push(this.parseExpression());
+          if (this.check('COMMA')) {
+            this.advance();
+          } else {
+            break;
+          }
+        } while (true);
+
+        this.consume('RBRACKET', 'Expected ] after array indices');
+
+        target = {
+          type: 'ArrayAccess',
+          array: identifier,
+          indices,
+          line
+        };
+      } else {
+        target = {
+          type: 'Identifier',
+          name: identifier,
+          line
+        };
+      }
     }
 
     return {

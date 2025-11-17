@@ -85,7 +85,7 @@ export interface ArrayBounds {
 
 export interface AssignmentNode extends BaseNode {
   type: 'Assignment';
-  target: IdentifierNode | ArrayAccessNode;
+  target: IdentifierNode | ArrayAccessNode | DereferenceNode;
   value: ExpressionNode;
 }
 
@@ -96,7 +96,7 @@ export interface OutputNode extends BaseNode {
 
 export interface InputNode extends BaseNode {
   type: 'Input';
-  target: IdentifierNode | ArrayAccessNode;
+  target: IdentifierNode | ArrayAccessNode | DereferenceNode;
 }
 
 export interface IfNode extends BaseNode {
@@ -187,7 +187,7 @@ export interface CloseFileNode extends BaseNode {
 export interface ReadFileNode extends BaseNode {
   type: 'ReadFile';
   filename: ExpressionNode;
-  target: IdentifierNode | ArrayAccessNode;
+  target: IdentifierNode | ArrayAccessNode | DereferenceNode;
 }
 
 export interface WriteFileNode extends BaseNode {

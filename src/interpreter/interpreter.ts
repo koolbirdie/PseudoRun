@@ -420,7 +420,12 @@ export class Interpreter {
 
       variable.value = value;
       variable.initialized = true;
-      
+
+      // Update memory if variable has a memory address
+      if (variable.memoryAddress !== undefined) {
+        this.memory.write(variable.memoryAddress, value);
+      }
+
       // Echo the entered value to output
       yield input;
     } else if (node.target.type === 'ArrayAccess') {
@@ -447,7 +452,7 @@ export class Interpreter {
       // Determine the type to prompt for based on array element type
       const elementType = variable.elementType || 'STRING';
       const promptName = `${arrayAccess.array}[${indices.join(', ')}]`;
-      
+
       // Use the inputHandler to get input
       const input = await this.inputHandler(promptName, elementType);
 
@@ -468,7 +473,33 @@ export class Interpreter {
       }
 
       this.setArrayElement(variable.value, indices, value, variable.dimensions!, node.line);
-      
+
+      // Echo the entered value to output
+      yield input;
+    } else if ((node.target as any).type === 'Dereference') {
+      // Pointer dereference input (*ptr)
+      const derefNode = node.target as DereferenceNode;
+      const pointerAddress = this.evaluateExpression(derefNode.pointer, context);
+
+      if (typeof pointerAddress !== 'number') {
+        throw new RuntimeError(`Dereference requires pointer address`, node.line);
+      }
+
+      // Prompt for input value using a generic type
+      const input = await this.inputHandler('*ptr', 'INTEGER');
+      let value: any;
+
+      // Try to parse as INTEGER first, then fallback to string
+      const parsedInt = parseInt(input);
+      if (!isNaN(parsedInt)) {
+        value = parsedInt;
+      } else {
+        value = input;
+      }
+
+      // Write to memory location pointed to by pointer
+      this.memory.write(pointerAddress, value);
+
       // Echo the entered value to output
       yield input;
     }
@@ -813,6 +844,26 @@ export class Interpreter {
       }
 
       this.setArrayElement(variable.value, indices, value, variable.dimensions!, node.line);
+    } else if ((node.target as any).type === 'Dereference') {
+      // Pointer dereference read file (*ptr)
+      const derefNode = node.target as DereferenceNode;
+      const pointerAddress = this.evaluateExpression(derefNode.pointer, context);
+
+      if (typeof pointerAddress !== 'number') {
+        throw new RuntimeError(`Dereference requires pointer address`, node.line);
+      }
+
+      // Parse the line value as INTEGER first, then fallback to string
+      let value: any;
+      const parsedInt = parseInt(line);
+      if (!isNaN(parsedInt)) {
+        value = parsedInt;
+      } else {
+        value = line;
+      }
+
+      // Write to memory location pointed to by pointer
+      this.memory.write(pointerAddress, value);
     }
 
     yield line;
@@ -1062,6 +1113,16 @@ export class Interpreter {
       });
 
       this.setArrayElement(variable.value, indices, value, variable.dimensions!, node.line);
+    } else if ((node.target as any).type === 'Dereference') {
+      // Handle assignment through pointer dereference (*ptr = value) in sync mode
+      const derefNode = node.target as DereferenceNode;
+      const pointerAddress = this.evaluateExpression(derefNode.pointer, _context);
+
+      if (typeof pointerAddress !== 'number') {
+        throw new RuntimeError(`Dereference requires pointer address`, node.line);
+      }
+
+      this.memory.write(pointerAddress, value);
     }
   }
 
