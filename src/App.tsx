@@ -538,6 +538,11 @@ function App() {
     setCode(newCode);
   };
 
+  // Handle memory view toggle
+  const handleToggleMemoryView = () => {
+    setShowMemoryView(!showMemoryView);
+  };
+
   // Auto-save current program every 30 seconds
   useEffect(() => {
     if (!currentUser || !currentProgram || !currentProgram.id) return;
