@@ -96,7 +96,7 @@ export interface OutputNode extends BaseNode {
 
 export interface InputNode extends BaseNode {
   type: 'Input';
-  target: IdentifierNode | ArrayAccessNode;
+  target: IdentifierNode | ArrayAccessNode | DereferenceNode;
 }
 
 export interface IfNode extends BaseNode {
