@@ -1,6 +1,6 @@
 // Test parser functionality
-import { Parser } from './parser.ts';
-import { Lexer } from './lexer.ts';
+import { Parser } from './interpreter/parser.ts';
+import { Lexer } from './interpreter/lexer.ts';
 
 // Test pointer assignment code that was previously failing
 const testCode = `
