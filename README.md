@@ -524,6 +524,14 @@ The editor detects and reports:
 - Uninitialized variables
 - Invalid function parameters
 
+### Memory Errors (NEW!)
+- Invalid pointer dereference
+- Memory allocation failure
+- Access to freed memory
+- Null pointer access
+- Memory bounds violations
+- Invalid pointer types
+
 ## 🌟 Use Cases
 
 - 📚 **Learning** - Practice IGCSE/A-LEVELS pseudocode
