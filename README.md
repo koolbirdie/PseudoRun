@@ -203,7 +203,7 @@ OUTPUT address         // Displays: 4096
 
 ## 📚 Examples
 
-The editor includes **22 comprehensive examples** covering:
+The editor includes **31 comprehensive examples** covering:
 
 1. **Basic Input/Output** - Simple I/O operations
 2. **IF Statement** - Grade calculator with multiple conditions
