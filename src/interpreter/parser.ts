@@ -24,9 +24,16 @@ import {
   CloseFileNode,
   ReadFileNode,
   WriteFileNode,
+  MemoryFreeNode,
   LiteralNode,
   IdentifierNode,
   ArrayAccessNode,
+  AddressOfNode,
+  DereferenceNode,
+  PointerCastNode,
+  MemoryAllocationNode,
+  SizeOfNode,
+  FunctionCallNode,
   DataType,
   Parameter
 } from './types';
