@@ -28,7 +28,8 @@ export interface Token {
 }
 
 // Data types
-export type DataType = 'INTEGER' | 'REAL' | 'STRING' | 'CHAR' | 'BOOLEAN' | 'ARRAY';
+export type DataType = 'INTEGER' | 'REAL' | 'STRING' | 'CHAR' | 'BOOLEAN' | 'ARRAY' |
+                      'POINTER_TO_INTEGER' | 'POINTER_TO_REAL' | 'POINTER_TO_CHAR' | 'VOID_POINTER';
 
 // AST Node types
 export type ASTNode =
