@@ -1158,16 +1158,24 @@ export class Parser {
         }
 
         if (name === 'SIZE_OF') {
-          // SIZE_OF expects a type argument
-          if (args.length !== 1 || args[0].type !== 'Identifier') {
-            throw new Error(`SIZE_OF expects a type identifier at line ${token.line}`);
+          // Parse the type argument manually instead of using parseExpression
+          // This allows us to accept KEYWORD tokens for type names
+          const typeToken = this.peek();
+
+          if (typeToken.type === 'IDENTIFIER' ||
+              (typeToken.type === 'KEYWORD' && this.isValidDataTypeKeyword(typeToken.value))) {
+            const typeName = typeToken.value;
+            this.advance(); // consume the type token
+            this.consume('RPAREN', 'Expected ) after SIZE_OF argument');
+
+            return {
+              type: 'SizeOf',
+              dataType: typeName as DataType,
+              line: token.line
+            };
+          } else {
+            throw new Error(`SIZE_OF expects a valid data type at line ${typeToken.line}`);
           }
-          const typeName = (args[0] as IdentifierNode).name;
-          return {
-            type: 'SizeOf',
-            dataType: typeName as DataType,
-            line: token.line
-          };
         }
 
         // Regular function call for INT, REAL, STRING
@@ -1283,6 +1291,11 @@ export class Parser {
     while (this.check('NEWLINE') && !this.isAtEnd()) {
       this.advance();
     }
+  }
+
+  private isValidDataTypeKeyword(value: string): boolean {
+    return ['INTEGER', 'REAL', 'STRING', 'CHAR', 'BOOLEAN',
+            'POINTER_TO_INTEGER', 'POINTER_TO_REAL', 'POINTER_TO_CHAR', 'VOID_POINTER'].includes(value);
   }
 }
 
