@@ -1113,6 +1113,16 @@ export class Interpreter {
       });
 
       this.setArrayElement(variable.value, indices, value, variable.dimensions!, node.line);
+    } else if ((node.target as any).type === 'Dereference') {
+      // Handle assignment through pointer dereference (*ptr = value) in sync mode
+      const derefNode = node.target as DereferenceNode;
+      const pointerAddress = this.evaluateExpression(derefNode.pointer, _context);
+
+      if (typeof pointerAddress !== 'number') {
+        throw new RuntimeError(`Dereference requires pointer address`, node.line);
+      }
+
+      this.memory.write(pointerAddress, value);
     }
   }
 
