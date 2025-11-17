@@ -23,18 +23,25 @@ import {
   CloseFileNode,
   ReadFileNode,
   WriteFileNode,
+  MemoryFreeNode,
   LiteralNode,
   IdentifierNode,
   ArrayAccessNode,
   FunctionCallNode,
   BinaryOpNode,
   UnaryOpNode,
+  AddressOfNode,
+  DereferenceNode,
+  MemoryAllocationNode,
+  SizeOfNode,
   ExecutionContext,
   Variable,
   RuntimeError,
   CallStackFrame,
   DebugState
 } from './types';
+
+import { MemoryEngine } from './memory';
 
 const MAX_ITERATIONS = 10000;
 const MAX_RECURSION_DEPTH = 1000;
