@@ -26,7 +26,7 @@
 - ✅ **Error Detection** - Detailed syntax and runtime error messages with line numbers
 - ✅ **Auto-save** - Code persists in browser LocalStorage
 - ✅ **File Operations** - Download/upload code as .txt files
-- ✅ **22 Built-in Examples** - Learn from comprehensive sample programs
+- ✅ **31 Built-in Examples** - Learn from comprehensive sample programs including 6 memory management examples
 - ✅ **Responsive Design** - Works on desktop, tablet, and mobile
 - ✅ **User Authentication** - Secure login with Google or Email/Password
 - ✅ **Guest Mode** - Try all features without signing up!
