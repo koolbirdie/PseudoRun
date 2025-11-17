@@ -88,6 +88,8 @@ export class Interpreter {
     this.stepCallback = stepCallback;
     this.fileWriteOutput = fileWriteOutput;
     this.fileUploadHandler = fileUploadHandler;
+    this.memory = new MemoryEngine();
+    this.variableAddresses = new Map();
   }
 
   private defaultInputHandler(variableName: string): Promise<string> {
