@@ -1224,7 +1224,12 @@ export class Interpreter {
   private evaluateExpression(expr: ExpressionNode, context: ExecutionContext): any {
     switch (expr.type) {
       case 'Literal':
-        return (expr as LiteralNode).value;
+        const literal = expr as LiteralNode;
+        // Handle hex literals
+        if (typeof literal.value === 'string' && literal.value.startsWith('0x')) {
+          return parseInt(literal.value, 16);
+        }
+        return literal.value;
 
       case 'Identifier':
         return this.evaluateIdentifier(expr as IdentifierNode, context);
