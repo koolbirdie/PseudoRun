@@ -1033,7 +1033,7 @@ export class Interpreter {
 
     if (node.target.type === 'Identifier') {
       const varName = (node.target as IdentifierNode).name;
-      const variable = this.getVariable(varName, context);
+      const variable = this.getVariable(varName, _context);
 
       if (!variable) {
         throw new RuntimeError(`Variable '${varName}' not declared`, node.line);
@@ -1043,7 +1043,7 @@ export class Interpreter {
       variable.initialized = true;
     } else if (node.target.type === 'ArrayAccess') {
       const arrayAccess = node.target as ArrayAccessNode;
-      const variable = this.getVariable(arrayAccess.array, context);
+      const variable = this.getVariable(arrayAccess.array, _context);
 
       if (!variable) {
         throw new RuntimeError(`Array '${arrayAccess.array}' not declared`, node.line);
@@ -1054,7 +1054,7 @@ export class Interpreter {
       }
 
       const indices = arrayAccess.indices.map(idx => {
-        const val = this.evaluateExpression(idx, context);
+        const val = this.evaluateExpression(idx, _context);
         if (typeof val !== 'number') {
           throw new RuntimeError(`Array index must be a number`, node.line);
         }
