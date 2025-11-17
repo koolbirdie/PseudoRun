@@ -1090,8 +1090,8 @@ export class Parser {
       return expr;
     }
 
-    // Type conversion functions (INT, REAL, STRING are keywords but can be function calls)
-    if (token.type === 'KEYWORD' && ['INT', 'REAL', 'STRING'].includes(token.value)) {
+    // Special function calls (MALLOC, SIZE_OF, and type conversion functions)
+    if (token.type === 'KEYWORD' && ['INT', 'REAL', 'STRING', 'MALLOC', 'SIZE_OF'].includes(token.value)) {
       if (this.tokens[this.current + 1]?.type === 'LPAREN') {
         const name = this.advance().value;
         this.advance(); // consume (
@@ -1111,6 +1111,34 @@ export class Parser {
 
         this.consume('RPAREN', 'Expected ) after function arguments');
 
+        // Handle special cases
+        if (name === 'MALLOC') {
+          // MALLOC expects size argument and returns a pointer
+          if (args.length !== 1) {
+            throw new Error(`MALLOC expects exactly 1 argument at line ${token.line}`);
+          }
+          return {
+            type: 'MemoryAllocation',
+            size: args[0],
+            targetType: 'VOID_POINTER', // Default type, can be cast later
+            line: token.line
+          };
+        }
+
+        if (name === 'SIZE_OF') {
+          // SIZE_OF expects a type argument
+          if (args.length !== 1 || args[0].type !== 'Identifier') {
+            throw new Error(`SIZE_OF expects a type identifier at line ${token.line}`);
+          }
+          const typeName = (args[0] as IdentifierNode).name;
+          return {
+            type: 'SizeOf',
+            dataType: typeName as DataType,
+            line: token.line
+          };
+        }
+
+        // Regular function call for INT, REAL, STRING
         return {
           type: 'FunctionCall',
           name,
