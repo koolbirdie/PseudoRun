@@ -242,11 +242,46 @@ export class Interpreter {
         elementType: node.arrayElementType,
         initialized: false
       });
-    } else {
+    } else if (node.dataType.startsWith('POINTER_TO')) {
+      // Handle pointer types - allocate memory for storing address
+      const address = this.memory.allocate(1, node.dataType);
+      this.variableAddresses.set(node.identifier, address);
       context.variables.set(node.identifier, {
         type: node.dataType,
-        value: undefined,
-        initialized: false
+        value: 0, // Initialize to null pointer (address 0)
+        initialized: true,
+        memoryAddress: address
+      });
+    } else {
+      // Handle regular variables with memory allocation
+      const size = this.memory.getTypeSize(node.dataType);
+      const address = this.memory.allocate(size, node.dataType);
+      this.variableAddresses.set(node.identifier, address);
+
+      // Initialize with default value
+      let defaultValue: any;
+      switch (node.dataType) {
+        case 'INTEGER':
+        case 'REAL':
+          defaultValue = 0;
+          break;
+        case 'BOOLEAN':
+          defaultValue = false;
+          break;
+        case 'STRING':
+        case 'CHAR':
+          defaultValue = '';
+          break;
+        default:
+          defaultValue = undefined;
+      }
+
+      this.memory.write(address, defaultValue);
+      context.variables.set(node.identifier, {
+        type: node.dataType,
+        value: defaultValue,
+        initialized: true,
+        memoryAddress: address
       });
     }
   }
