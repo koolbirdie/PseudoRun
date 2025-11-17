@@ -26,7 +26,7 @@ import { validate } from './validator/validator';
 import { saveCode, loadCode, clearSavedCode } from './utils/storage';
 import { downloadCode, readFile } from './utils/fileHandler';
 import { debounce } from './utils/debounce';
-import { RuntimeError, DebugState } from './interpreter/types';
+import { RuntimeError, DebugState, MemoryTraceEntry } from './interpreter/types';
 import { useAuth } from './contexts/AuthContext';
 import { Program } from './types/program';
 import { createProgram, updateProgram } from './services/programsService';
