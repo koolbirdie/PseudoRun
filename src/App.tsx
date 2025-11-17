@@ -72,7 +72,7 @@ function App() {
 
   // Memory view state
   const [showMemoryView, setShowMemoryView] = useState(false);
-  const [memoryTrace, setMemoryTrace] = useState<MemoryTraceEntry[]>([]);
+  const [memoryTrace] = useState<MemoryTraceEntry[]>([]);
 
   // Guest mode auth modal state
   const [showAuthModal, setShowAuthModal] = useState(false);
