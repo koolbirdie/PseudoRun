@@ -85,7 +85,7 @@ export interface ArrayBounds {
 
 export interface AssignmentNode extends BaseNode {
   type: 'Assignment';
-  target: IdentifierNode | ArrayAccessNode;
+  target: IdentifierNode | ArrayAccessNode | DereferenceNode;
   value: ExpressionNode;
 }
 
