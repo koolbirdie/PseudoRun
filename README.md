@@ -539,6 +539,10 @@ The editor detects and reports:
 - 👨‍🏫 **Teaching** - Demonstrate concepts in class
 - 🔬 **Algorithm Testing** - Verify logic before implementation
 - 💡 **Quick Prototyping** - Test ideas rapidly
+- 🧠 **Memory Education** - Learn low-level programming concepts
+- 🔍 **Algorithm Research** - Analyze memory usage patterns
+- 🎓 **C/C++ Preparation** - Practice pointer concepts before learning C
+- 📊 **Data Structures** - Implement linked lists, trees, and graphs
 
 ## 🎯 Roadmap
 
