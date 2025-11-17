@@ -20,6 +20,7 @@ interface ToolbarProps {
   onOpenSyntaxReference: () => void;
   onOpenPracticeProblems: () => void;
   onOpenExamMode: () => void;
+  onToggleMemoryView: () => void;
   // onOpenLearningTools: () => void;
   isRunning: boolean;
   examModeActive: boolean;
