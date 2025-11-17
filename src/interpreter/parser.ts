@@ -1014,6 +1014,31 @@ export class Parser {
   private parsePrimary(): ExpressionNode {
     const token = this.peek();
 
+    // Address-of operator (&)
+    if (token.type === 'OPERATOR' && token.value === '&') {
+      const op = this.advance();
+      const operand = this.parsePrimary();
+      if (operand.type !== 'Identifier') {
+        throw new Error(`& operator requires identifier at line ${op.line}`);
+      }
+      return {
+        type: 'AddressOf',
+        target: operand as IdentifierNode,
+        line: op.line
+      };
+    }
+
+    // Dereference operator (*)
+    if (token.type === 'OPERATOR' && token.value === '*') {
+      const op = this.advance();
+      const operand = this.parsePrimary();
+      return {
+        type: 'Dereference',
+        pointer: operand,
+        line: op.line
+      };
+    }
+
     // Literals
     if (token.type === 'NUMBER') {
       this.advance();
