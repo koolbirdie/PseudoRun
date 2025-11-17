@@ -13,7 +13,9 @@ const KEYWORDS = new Set([
   'RETURN', 'RETURNS', 'CALL', 'BYVAL', 'BYREF', 'TRUE', 'FALSE',
   'AND', 'OR', 'NOT', 'DIV', 'MOD',
   'OPENFILE', 'CLOSEFILE', 'READFILE', 'WRITEFILE', 'EOF',
-  'READ', 'WRITE', 'APPEND'
+  'READ', 'WRITE', 'APPEND',
+  // Memory management keywords
+  'MALLOC', 'FREE', 'SIZE_OF', 'POINTER_TO_INTEGER', 'POINTER_TO_REAL', 'POINTER_TO_CHAR', 'VOID_POINTER'
 ]);
 
 export function tokenize(code: string): Token[] {
