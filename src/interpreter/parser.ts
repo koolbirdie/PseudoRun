@@ -290,40 +290,52 @@ export class Parser {
 
   private parseInput(): InputNode {
     const line = this.advance().line; // consume INPUT
-    
-    // Parse target (identifier or array access)
-    let target: IdentifierNode | ArrayAccessNode;
 
-    const identifier = this.consume('IDENTIFIER', 'Expected identifier after INPUT').value;
+    // Parse target (identifier, array access, or dereference)
+    let target: IdentifierNode | ArrayAccessNode | DereferenceNode;
 
-    if (this.check('LBRACKET')) {
-      // Array access
-      this.advance(); // consume [
-      const indices: ExpressionNode[] = [];
-
-      do {
-        indices.push(this.parseExpression());
-        if (this.check('COMMA')) {
-          this.advance();
-        } else {
-          break;
-        }
-      } while (true);
-
-      this.consume('RBRACKET', 'Expected ] after array indices');
-
+    // Check for dereference operator
+    if (this.check('OPERATOR') && this.peek().value === '*') {
+      this.advance(); // consume *
+      const pointerExpr = this.parsePrimary();
       target = {
-        type: 'ArrayAccess',
-        array: identifier,
-        indices,
+        type: 'Dereference',
+        pointer: pointerExpr,
         line
       };
     } else {
-      target = {
-        type: 'Identifier',
-        name: identifier,
-        line
-      };
+      // Existing identifier/array access logic
+      const identifier = this.consume('IDENTIFIER', 'Expected identifier after INPUT').value;
+
+      if (this.check('LBRACKET')) {
+        // Array access
+        this.advance(); // consume [
+        const indices: ExpressionNode[] = [];
+
+        do {
+          indices.push(this.parseExpression());
+          if (this.check('COMMA')) {
+            this.advance();
+          } else {
+            break;
+          }
+        } while (true);
+
+        this.consume('RBRACKET', 'Expected ] after array indices');
+
+        target = {
+          type: 'ArrayAccess',
+          array: identifier,
+          indices,
+          line
+        };
+      } else {
+        target = {
+          type: 'Identifier',
+          name: identifier,
+          line
+        };
+      }
     }
 
     return {
