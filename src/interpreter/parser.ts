@@ -192,8 +192,9 @@ export class Parser {
       }
     }
 
-    // Check for assignment
-    if (token.type === 'IDENTIFIER') {
+    // Check for assignment (including dereference assignments)
+    if (token.type === 'IDENTIFIER' ||
+        (token.type === 'OPERATOR' && token.value === '*')) {
       return this.parseAssignment();
     }
 
