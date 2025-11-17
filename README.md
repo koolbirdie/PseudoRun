@@ -59,6 +59,14 @@ BOOLEAN     - TRUE or FALSE
 ARRAY       - Single and multi-dimensional arrays
 ```
 
+### 🧠 Memory Management Types (NEW!)
+```
+POINTER_TO_INTEGER    - Pointer to integer values
+POINTER_TO_REAL       - Pointer to real numbers
+POINTER_TO_CHAR       - Pointer to character values
+VOID_POINTER          - Generic pointer type
+```
+
 ### 🔀 Control Structures
 
 #### Conditionals
