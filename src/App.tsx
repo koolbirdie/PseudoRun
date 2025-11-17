@@ -70,6 +70,10 @@ function App() {
   const stepResolveRef = useRef<(() => void) | null>(null);
   const interpreterRef = useRef<Interpreter | null>(null);
 
+  // Memory view state
+  const [showMemoryView, setShowMemoryView] = useState(false);
+  const [memoryTrace, setMemoryTrace] = useState<MemoryTraceEntry[]>([]);
+
   // Guest mode auth modal state
   const [showAuthModal, setShowAuthModal] = useState(false);
 
