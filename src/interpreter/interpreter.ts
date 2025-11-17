@@ -1241,6 +1241,18 @@ export class Interpreter {
       case 'FunctionCall':
         return this.evaluateFunctionCall(expr as FunctionCallNode, context);
 
+      case 'AddressOf':
+        return this.evaluateAddressOf(expr as AddressOfNode, context);
+
+      case 'Dereference':
+        return this.evaluateDereference(expr as DereferenceNode, context);
+
+      case 'MemoryAllocation':
+        return this.evaluateMemoryAllocation(expr as MemoryAllocationNode, context);
+
+      case 'SizeOf':
+        return this.evaluateSizeOf(expr as SizeOfNode, context);
+
       default:
         // This should never happen due to exhaustive checking above
         throw new RuntimeError(`Unknown expression type: ${(expr as any).type}`, (expr as any).line);
