@@ -400,12 +400,18 @@ src/
 │   ├── Editor/         # CodeMirror editor with syntax highlighting
 │   ├── OutputPanel/    # Animated output display
 │   ├── ErrorDisplay/   # Error message panel
-│   └── Toolbar/        # Control buttons
+│   ├── Toolbar/        # Control buttons
+│   ├── MemoryView/     # Memory visualization and debugging (NEW!)
+│   └── Auth/           # User authentication components
 ├── interpreter/        # Core execution engine
-│   ├── lexer.ts       # Tokenization
-│   ├── parser.ts      # AST generation
-│   ├── interpreter.ts # Code execution
-│   └── types.ts       # Type definitions
+│   ├── lexer.ts       # Tokenization (extended with memory keywords)
+│   ├── parser.ts      # AST generation (extended with pointer operations)
+│   ├── interpreter.ts # Code execution (integrated memory engine)
+│   ├── memory.ts      # Memory management system (NEW!)
+│   ├── tracer.ts      # Memory operation tracing (NEW!)
+│   └── types.ts       # Type definitions (extended with pointer types)
+├── contexts/           # React contexts (Auth, Theme)
+├── services/           # Firebase and cloud services
 ├── validator/          # Real-time syntax validation
 ├── utils/             # Helper functions
 └── constants/         # Example programs
