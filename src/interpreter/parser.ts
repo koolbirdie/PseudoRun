@@ -1159,10 +1159,21 @@ export class Parser {
 
         if (name === 'SIZE_OF') {
           // SIZE_OF expects a type argument
-          if (args.length !== 1 || args[0].type !== 'Identifier') {
+          if (args.length !== 1) {
+            throw new Error(`SIZE_OF expects exactly 1 argument at line ${token.line}`);
+          }
+
+          let typeName: string;
+
+          if (args[0].type === 'Identifier') {
+            typeName = (args[0] as IdentifierNode).name;
+          } else if (args[0].type === 'Literal' && typeof args[0].value === 'string') {
+            // Handle type names passed as string literals
+            typeName = args[0].value;
+          } else {
             throw new Error(`SIZE_OF expects a type identifier at line ${token.line}`);
           }
-          const typeName = (args[0] as IdentifierNode).name;
+
           return {
             type: 'SizeOf',
             dataType: typeName as DataType,
