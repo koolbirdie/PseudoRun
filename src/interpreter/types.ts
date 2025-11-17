@@ -273,6 +273,15 @@ export interface Variable {
   dimensions?: Array<{ lower: number; upper: number }>;
   elementType?: DataType;
   initialized: boolean;
+  memoryAddress?: number; // Memory address for low-level variables
+}
+
+export interface MemoryMetadata {
+  address: number;
+  size: number;
+  type: DataType;
+  allocated: boolean;
+  variableName?: string;
 }
 
 export interface ExecutionContext {
