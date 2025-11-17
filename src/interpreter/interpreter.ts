@@ -1516,7 +1516,7 @@ export class Interpreter {
       const address = this.memory.allocate(size, node.targetType);
       return address;
     } catch (error) {
-      throw new RuntimeError(`Memory allocation error: ${error.message}`, node.line);
+      throw new RuntimeError(`Memory allocation error: ${(error as Error).message}`, node.line);
     }
   }
 
