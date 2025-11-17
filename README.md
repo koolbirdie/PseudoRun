@@ -413,6 +413,7 @@ src/
 
 ## 📝 Example Code
 
+### Traditional IGCSE Example
 ```pseudocode
 // Bubble Sort Algorithm
 DECLARE nums : ARRAY[1:5] OF INTEGER
@@ -449,6 +450,60 @@ OUTPUT "Sorted array:"
 FOR index <-- 1 TO 5
     OUTPUT nums[index]
 NEXT index
+```
+
+### Memory Management Example (NEW!)
+```pseudocode
+// Linked List Implementation using Pointers
+DECLARE nodeData : ARRAY[1:3] OF INTEGER
+DECLARE nextNode : ARRAY[1:3] OF INTEGER
+DECLARE head, current, newNode : POINTER_TO_INTEGER
+DECLARE i : INTEGER
+
+// Initialize linked list data
+nodeData[1] <-- 10
+nextNode[1] <-- 2    // Points to node 2
+nodeData[2] <-- 20
+nextNode[2] <-- 3    // Points to node 3
+nodeData[3] <-- 30
+nextNode[3] <-- 0    // NULL pointer
+
+// Create head pointer
+head <-- &nodeData[1]
+
+// Traverse linked list using pointers
+current <-- head
+OUTPUT "Linked List Contents:"
+WHILE current <> 0 DO
+    OUTPUT "Node value: ", *current
+    // Calculate next node address (simple example)
+    DECLARE nodeIndex : INTEGER
+    nodeIndex <-- (current - &nodeData[1]) / 4 + 1
+    IF nodeIndex <= 3 THEN
+        current <-- &nodeData[nextNode[nodeIndex]]
+    ELSE
+        current <-- 0  // End of list
+    ENDIF
+ENDWHILE
+
+// Dynamic memory allocation example
+DECLARE dynamicPtr : POINTER_TO_INTEGER
+DECLARE allocSize : INTEGER
+
+allocSize <-- SIZE_OF(INTEGER) * 5
+dynamicPtr <-- MALLOC(allocSize)
+
+// Use dynamically allocated memory
+*dynamicPtr <-- 100
+*(dynamicPtr + 4) <-- 200  // Second integer
+
+OUTPUT "Dynamic memory values:"
+OUTPUT "First: ", *dynamicPtr
+OUTPUT "Second: ", *(dynamicPtr + 4)
+
+// Clean up
+FREE(dynamicPtr)
+OUTPUT "Memory deallocated"
 ```
 
 ## 🐛 Error Detection
