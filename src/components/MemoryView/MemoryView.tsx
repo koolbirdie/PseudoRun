@@ -3,7 +3,7 @@
  * Displays memory state, variable addresses, and execution trace
  */
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { MemoryEngine } from '../../interpreter/memory';
 import { MemoryTraceEntry } from '../../interpreter/types';
 import styles from './MemoryView.module.css';
