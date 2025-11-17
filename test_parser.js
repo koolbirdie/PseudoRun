@@ -1,6 +1,6 @@
 // Simple test script to verify pointer assignment parsing works
-const { Parser } = require('./dist/parser');
-const { Lexer } = require('./dist/lexer');
+import { Parser } from './dist/parser.js';
+import { Lexer } from './dist/lexer.js';
 
 // Test pointer assignment code that was previously failing
 const testCode = `
