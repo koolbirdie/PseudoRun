@@ -191,6 +191,8 @@ export class Parser {
           return this.parseReadFile();
         case 'WRITEFILE':
           return this.parseWriteFile();
+        case 'FREE':
+          return this.parseMemoryFree();
         default:
           throw new Error(`Unexpected keyword '${token.value}' at line ${token.line}`);
       }
