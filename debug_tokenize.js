@@ -237,10 +237,6 @@ tokens.forEach((token, index) => {
 console.log('');
 parseForLoop(tokens);
 
-const testCode = `FOR i = 1 TO 5
-    OUTPUT i
-NEXT i`;
-
 console.log('Testing FOR loop with NEXT:');
 console.log('Code:');
 console.log(testCode);
