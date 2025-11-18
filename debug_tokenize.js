@@ -153,9 +153,9 @@ function parseForLoop(tokens) {
 
       skipNewlines();
 
-      if (check(TokenTypes.OPERATOR) && peek().value === '=') {
-        advance(); // consume =
-        console.log('Found assignment operator =');
+      if (check(TokenTypes.ASSIGNMENT)) {
+        advance(); // consume assignment
+        console.log('Found assignment operator');
 
         skipNewlines();
 
