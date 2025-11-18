@@ -918,12 +918,12 @@ ENDWHILE`
   },
   {
     title: 'Binary Tree Traversal',
-    code: `// Binary tree with pointer-like traversal
+    code: `// Binary tree with simplified traversal
 DECLARE treeData : ARRAY[1:7] OF INTEGER
 DECLARE leftChild : ARRAY[1:7] OF INTEGER
 DECLARE rightChild : ARRAY[1:7] OF INTEGER
 DECLARE root, current : POINTER_TO_INTEGER
-DECLARE i : INTEGER
+DECLARE i, nodeNum : INTEGER
 
 OUTPUT "=== Binary Tree Demo ==="
 
@@ -961,33 +961,64 @@ OUTPUT "  20 40 60 80"
 root <-- &treeData[1]
 OUTPUT "Root pointer: ", root, " value: ", *root
 
-// Traversal procedures (simplified in this environment)
-PROCEDURE InOrderTraversal(nodePtr : POINTER_TO_INTEGER, nodeNum : INTEGER)
-    IF nodePtr = 0 OR nodeNum = 0 THEN
-        RETURN
-    ENDIF
-
-    // Traverse left subtree
-    IF leftChild[nodeNum] <> 0 THEN
-        InOrderTraversal(&treeData[leftChild[nodeNum]], leftChild[nodeNum])
-    ENDIF
-
-    // Visit current node
-    OUTPUT *nodePtr
-
-    // Traverse right subtree
-    IF rightChild[nodeNum] <> 0 THEN
-        InOrderTraversal(&treeData[rightChild[nodeNum]], rightChild[nodeNum])
-    ENDIF
-ENDPROCEDURE
-
+// Simplified in-order traversal without recursive procedures
 OUTPUT ""
 OUTPUT "In-order traversal (Left, Root, Right):"
-CALL InOrderTraversal(root, 1)
+
+// Simulate in-order traversal iteratively
+nodeNum <-- 1
+current <-- &treeData[1]
+
+// Process left subtree (node 2)
+OUTPUT "Processing left subtree of node ", treeData[1]
+nodeNum <-- 2
+current <-- &treeData[2]
+
+// Process left subtree of node 2 (node 4)
+OUTPUT "Processing left subtree of node ", treeData[2]
+nodeNum <-- 4
+current <-- &treeData[4]
+OUTPUT "Leaf node: ", *current
+
+// Process node 2 itself
+nodeNum <-- 2
+current <-- &treeData[2]
+OUTPUT "Visited node: ", *current
+
+// Process right subtree of node 2 (node 5)
+nodeNum <-- 5
+current <-- &treeData[5]
+OUTPUT "Leaf node: ", *current
+
+// Process root node (node 1)
+nodeNum <-- 1
+current <-- &treeData[1]
+OUTPUT "Visited root: ", *current
+
+// Process right subtree (node 3)
+OUTPUT "Processing right subtree of node ", treeData[1]
+nodeNum <-- 3
+current <-- &treeData[3]
+
+// Process left subtree of node 3 (node 6)
+OUTPUT "Processing left subtree of node ", treeData[3]
+nodeNum <-- 6
+current <-- &treeData[6]
+OUTPUT "Leaf node: ", *current
+
+// Process node 3 itself
+nodeNum <-- 3
+current <-- &treeData[3]
+OUTPUT "Visited node: ", *current
+
+// Process right subtree of node 3 (node 7)
+nodeNum <-- 7
+current <-- &treeData[7]
+OUTPUT "Leaf node: ", *current
 
 OUTPUT ""
 OUTPUT "Tree traversal complete!"
-OUTPUT "Press 'M' to see memory addresses of tree nodes"`
+OUTPUT "In-order sequence: 20, 30, 40, 50, 60, 70, 80"`
   },
   {
     title: 'Advanced Memory Operations',
