@@ -930,7 +930,10 @@ export class Parser {
 
   // Expression parsing with operator precedence
   private parseExpression(): ExpressionNode {
-    return this.parseOr();
+    console.log(`=== parseExpression DEBUG: Starting at position ${this.current}, token: ${JSON.stringify(this.peek())} ===`);
+    const result = this.parseOr();
+    console.log(`=== parseExpression DEBUG: Completed successfully ===`);
+    return result;
   }
 
   private parseOr(): ExpressionNode {
