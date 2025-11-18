@@ -1158,6 +1158,10 @@ export class Parser {
         }
 
         if (name === 'SIZE_OF') {
+          console.log('=== SIZE_OF DEBUG ===');
+          console.log('Current position:', this.current);
+          console.log('Current token:', JSON.stringify(this.peek()));
+
           // Parse the type argument - allow both IDENTIFIER and KEYWORD tokens
           if (this.check('RPAREN')) {
             throw new Error(`SIZE_OF expects a type argument at line ${token.line}`);
@@ -1166,19 +1170,32 @@ export class Parser {
           let typeToken: Token;
           let typeName: string;
 
+          console.log('Next token check:', JSON.stringify(this.peek()));
+
           // Handle both IDENTIFIER and KEYWORD tokens for type names
           if (this.check('IDENTIFIER')) {
+            console.log('Found IDENTIFIER token');
             typeToken = this.advance();
             typeName = typeToken.value;
-          } else if (this.check('KEYWORD') && this.isValidDataTypeKeyword(this.peek().value)) {
-            typeToken = this.advance();
-            typeName = typeToken.value;
+          } else if (this.check('KEYWORD')) {
+            console.log('Found KEYWORD token:', this.peek().value);
+            console.log('Is valid data type?', this.isValidDataTypeKeyword(this.peek().value));
+            if (this.isValidDataTypeKeyword(this.peek().value)) {
+              typeToken = this.advance();
+              typeName = typeToken.value;
+            } else {
+              const currentToken = this.peek();
+              throw new Error(`SIZE_OF expects a valid data type at line ${currentToken.line}, but got invalid keyword '${currentToken.value}'`);
+            }
           } else {
             const currentToken = this.peek();
             throw new Error(`SIZE_OF expects a valid data type at line ${currentToken.line}, but got token type '${currentToken.type}' with value '${currentToken.value}'`);
           }
 
+          console.log('Type name extracted:', typeName);
           this.consume('RPAREN', 'Expected ) after SIZE_OF argument');
+          console.log('SIZE_OF parsing successful');
+          console.log('=== END SIZE_OF DEBUG ===');
 
           return {
             type: 'SizeOf',
@@ -1309,6 +1326,13 @@ export class Parser {
 }
 
 export function parse(tokens: Token[]): ASTNode[] {
+  // DEBUG: Log tokens
+  console.log('=== PARSER DEBUG: Input Tokens ===');
+  tokens.forEach((token, index) => {
+    console.log(`${index}: ${token.type}("${token.value}") at line ${token.line}, col ${token.column}`);
+  });
+  console.log('=== END TOKENS ===\n');
+
   const parser = new Parser(tokens);
   return parser.parse();
 }
