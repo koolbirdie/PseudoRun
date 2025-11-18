@@ -236,10 +236,6 @@ tokens.forEach((token, index) => {
 
 console.log('');
 parseForLoop(tokens);
-
-console.log('Testing FOR loop with NEXT:');
-console.log('Code:');
-console.log(testCode);
 console.log('');
 
 console.log('=== TOKENIZATION ===');
