@@ -431,7 +431,7 @@ npm run preview
 - **Clear** - Remove all code (with confirmation)
 - **Download** - Save code as timestamped .txt file
 - **Upload** - Load code from .txt file
-- **Examples** - Load any of 22 sample programs
+- **Examples** - Load any of 31 sample programs
 
 ### Learning Features
 
