@@ -234,19 +234,26 @@ export class Interpreter {
 
   private executeDeclare(node: DeclareNode, context: ExecutionContext): void {
     if (node.dataType === 'ARRAY') {
+      console.log(`=== DEBUG: Declaring ARRAY '${node.identifier}' ===`);
       const dimensions = node.arrayBounds!.dimensions;
+      console.log(`Array dimensions:`, dimensions);
 
       // Calculate total array size for memory allocation
       const totalElements = dimensions.reduce((total, dim) => {
         return total * (dim.upper - dim.lower + 1);
       }, 1);
+      console.log(`Total elements:`, totalElements);
 
       const elementSize = this.memory.getTypeSize(node.arrayElementType || 'INTEGER');
       const arraySize = totalElements * elementSize;
+      console.log(`Element size:`, elementSize, `Total array size:`, arraySize);
 
       // Allocate memory for the entire array
       const address = this.memory.allocate(arraySize, 'ARRAY');
+      console.log(`Allocated array at address:`, address);
       this.variableAddresses.set(node.identifier, address);
+
+      console.log(`variableAddresses now contains:`, Array.from(this.variableAddresses.entries()));
 
       context.variables.set(node.identifier, {
         type: 'ARRAY',
@@ -256,6 +263,7 @@ export class Interpreter {
         initialized: false,
         memoryAddress: address
       });
+      console.log(`=== END ARRAY DECLARATION DEBUG ===`);
     } else if (node.dataType.startsWith('POINTER_TO')) {
       // Handle pointer types - allocate memory for storing address
       const address = this.memory.allocate(1, node.dataType);
