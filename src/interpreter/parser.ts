@@ -1064,12 +1064,15 @@ export class Parser {
     if (token.type === 'OPERATOR' && token.value === '&') {
       const op = this.advance();
       const operand = this.parsePrimary();
-      if (operand.type !== 'Identifier') {
-        throw new Error(`& operator requires identifier at line ${op.line}`);
+
+      // Accept both identifiers and array access expressions
+      if (operand.type !== 'Identifier' && operand.type !== 'ArrayAccess') {
+        throw new Error(`& operator requires identifier or array access at line ${op.line}`);
       }
+
       return {
         type: 'AddressOf',
-        target: operand as IdentifierNode,
+        target: operand,
         line: op.line
       };
     }
