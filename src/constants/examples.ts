@@ -1084,7 +1084,7 @@ charPtr <-- &letters[1]
 OUTPUT ""
 OUTPUT "Before: letters[1] = ", *charPtr
 tempChar <-- *charPtr
-*charPtr <-- 'Z'
+*charPtr <-- 90  // ASCII 'Z'
 OUTPUT "After: letters[1] = ", *charPtr
 
 // Demonstrating memory layout
