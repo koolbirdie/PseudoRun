@@ -1,0 +1,3 @@
+DECLARE testSize : INTEGER
+testSize <-- SIZE_OF(INTEGER)
+OUTPUT "Size: ", testSize
