@@ -327,7 +327,7 @@ npm run dev
 - ✅ **Full pseudocode execution** - Run any IGCSE/A-LEVELS program
 - ✅ **Memory debugging** - Complete pointer and memory visualization
 - ✅ **Real-time validation** - Syntax checking and error detection
-- ✅ **All examples** - Access 22 built-in example programs
+- ✅ **All examples** - Access 31 built-in example programs
 - ✅ **File operations** - Download/upload your code
 - ✅ **Auto-save** - Code persists in browser
 
