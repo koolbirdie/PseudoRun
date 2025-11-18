@@ -1246,7 +1246,7 @@ export class Interpreter {
       throw new RuntimeError(`FOR loop STEP cannot be zero`, node.line);
     }
 
-    variable.value = Math.floor(start);
+    variable.value = start;
     variable.initialized = true;
 
     if (step > 0) {
@@ -1254,14 +1254,14 @@ export class Interpreter {
         for (const stmt of node.body) {
           this.executeSyncNode(stmt, context);
         }
-        variable.value += Math.floor(step);
+        variable.value += step;
       }
     } else {
       while (variable.value >= end) {
         for (const stmt of node.body) {
           this.executeSyncNode(stmt, context);
         }
-        variable.value += Math.floor(step);
+        variable.value += step;
       }
     }
   }
