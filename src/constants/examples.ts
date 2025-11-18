@@ -858,12 +858,18 @@ DECLARE i, nodeIndex : INTEGER
 OUTPUT "=== Linked List Demo ==="
 
 // Initialize linked list nodes (simplified static implementation)
-data[1] <-- 10; nextNode[1] <-- 2
-data[2] <-- 20; nextNode[2] <-- 3
-data[3] <-- 30; nextNode[3] <-- 4
-data[4] <-- 40; nextNode[4] <-- 5
-data[5] <-- 50; nextNode[5] <-- 0  // NULL pointer
-data[6] <-- 0; nextNode[6] <-- 0  // Empty node
+data[1] <-- 10
+nextNode[1] <-- 2
+data[2] <-- 20
+nextNode[2] <-- 3
+data[3] <-- 30
+nextNode[3] <-- 4
+data[4] <-- 40
+nextNode[4] <-- 5
+data[5] <-- 50
+nextNode[5] <-- 0  // NULL pointer
+data[6] <-- 0
+nextNode[6] <-- 0  // Empty node
 
 // Set head pointer to first node
 head <-- &data[1]
@@ -890,7 +896,8 @@ ENDWHILE
 // Demonstrate inserting a node (at beginning)
 OUTPUT ""
 OUTPUT "Inserting new node at beginning:"
-data[6] <-- 5; nextNode[6] <-- 1
+data[6] <-- 5
+nextNode[6] <-- 1
 head <-- &data[6]
 
 // Traverse again to show insertion
