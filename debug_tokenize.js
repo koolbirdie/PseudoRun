@@ -49,9 +49,23 @@ function tokenize(code) {
       continue;
     }
 
-    // Assignment operator =
+    // Assignment operator ← or <-- or =
+    if (char === '←' || (char === '<' && code[i + 1] === '-' && code[i + 2] === '-')) {
+      const startColumn = column;
+      if (char === '←') {
+        i++;
+        column++;
+      } else {
+        i += 3;
+        column += 3;
+      }
+      tokens.push({ type: 'ASSIGNMENT', value: '<--', line, column: startColumn });
+      continue;
+    }
+
+    // Regular = operator (not assignment in pseudocode)
     if (char === '=') {
-      tokens.push({ type: TokenTypes.OPERATOR, value: char, line, column });
+      tokens.push({ type: 'OPERATOR', value: char, line, column });
       i++;
       column++;
       continue;
