@@ -1262,12 +1262,21 @@ export class Interpreter {
     variable.value = start;
     variable.initialized = true;
 
+    // Update memory if variable has a memory address
+    if (variable.memoryAddress !== undefined) {
+      this.memory.write(variable.memoryAddress, start);
+    }
+
     if (step > 0) {
       while (variable.value <= end) {
         for (const stmt of node.body) {
           this.executeSyncNode(stmt, context);
         }
         variable.value += step;
+        // Update memory after increment
+        if (variable.memoryAddress !== undefined) {
+          this.memory.write(variable.memoryAddress, variable.value);
+        }
       }
     } else {
       while (variable.value >= end) {
@@ -1275,6 +1284,10 @@ export class Interpreter {
           this.executeSyncNode(stmt, context);
         }
         variable.value += step;
+        // Update memory after increment
+        if (variable.memoryAddress !== undefined) {
+          this.memory.write(variable.memoryAddress, variable.value);
+        }
       }
     }
   }
