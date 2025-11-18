@@ -1,0 +1,6 @@
+// Test case: Basic FOR loop without explicit STEP
+DECLARE counter : INTEGER
+FOR counter <-- 1 TO 10
+    OUTPUT counter
+NEXT counter
+OUTPUT "Done!"
