@@ -147,10 +147,12 @@ export class Interpreter {
   }
 
   public async* executeProgram(ast: ASTNode[]): AsyncGenerator<string, void, unknown> {
+    console.log(`[EXECUTION] executeProgram called with ${ast.length} AST nodes`);
     yield* this.execute(ast);
   }
 
   public async* execute(ast: ASTNode[]): AsyncGenerator<string, void, unknown> {
+    console.log(`[EXECUTION] execute called with ${ast.length} AST nodes`);
     // First pass: register procedures and functions
     for (const node of ast) {
       if (node.type === 'Procedure') {
@@ -161,8 +163,11 @@ export class Interpreter {
     }
 
     // Second pass: execute statements
+    console.log(`[EXECUTION] Starting second pass - executing statements`);
     for (const node of ast) {
+      console.log(`[EXECUTION] Processing node type: ${node.type}`);
       if (node.type !== 'Procedure' && node.type !== 'Function') {
+        console.log(`[EXECUTION] Calling executeNode for ${node.type}`);
         yield* this.executeNode(node, this.globalContext);
       }
     }
