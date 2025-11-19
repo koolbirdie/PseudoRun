@@ -42,6 +42,7 @@ import {
 } from './types';
 
 import { MemoryEngine } from './memory';
+import { MemoryTracer } from './tracer';
 
 const MAX_ITERATIONS = 10000;
 const MAX_RECURSION_DEPTH = 1000;
