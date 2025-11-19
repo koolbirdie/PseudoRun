@@ -1,9 +1,9 @@
 /**
  * Memory trace system for low-level algorithm research environment
- * Tracks all memory operations for debugging and analysis
+ * Tracks all memory operations for debugging and analysis with enhanced visual support
  */
 
-import { MemoryTraceEntry } from './types';
+import { MemoryTraceEntry, Variable } from './types';
 import { MemoryEngine } from './memory';
 
 export class MemoryTracer {
