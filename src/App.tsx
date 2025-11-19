@@ -151,8 +151,11 @@ function App() {
 
   // Handle run execution
   const handleRun = async () => {
+    console.log(`[App] handleRun method called! isRunning: ${isRunning}, errors: ${errors.length}`);
+
     // Check for syntax errors first
     if (errors.length > 0 && errors.some(e => e.type === 'syntax')) {
+      console.log(`[App] Syntax errors found, blocking execution`);
       alert('Fix syntax errors before running');
       return;
     }
