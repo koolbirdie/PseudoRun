@@ -129,12 +129,7 @@ export class MemoryTracer {
   /**
    * Log address-of operation (&)
    */
-<<<<<<< HEAD
   logAddressOf(line: number, variable: string, address: number, pointerAddress: number): void {
-=======
-  logAddressOf(line: number, variable: string, address: number): void {
-    console.log(`[TRACE] ADDRESS_OF: line=${line}, variable=${variable}, address=${address}`);
->>>>>>> main
     this.addEntry('ADDRESS_OF', line, {
       variable,
       address,
