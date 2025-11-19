@@ -212,6 +212,7 @@ function App() {
 
       // Collect trace data from interpreter
       const traceData = interpreter.getMemoryTracer().getTraceLog();
+      console.log(`[App] Collected ${traceData.length} trace entries`);
       setMemoryTrace(traceData);
 
       setIsRunning(false);
@@ -385,6 +386,7 @@ function App() {
 
       // Collect trace data from interpreter
       const traceData = interpreter.getMemoryTracer().getTraceLog();
+      console.log(`[App] Collected ${traceData.length} trace entries`);
       setMemoryTrace(traceData);
 
       setIsRunning(false);
