@@ -989,6 +989,8 @@ export class Interpreter {
     }
 
     try {
+      // Log memory deallocation
+      this.tracer.logFree(node.line, pointerAddress);
       this.memory.free(pointerAddress);
       yield `Freed memory at address 0x${pointerAddress.toString(16).toUpperCase()}`;
     } catch (error) {
