@@ -1,6 +1,5 @@
-import React, { useRef, useEffect, useImperativeHandle } from 'react';
-import { MemoryTraceEntry, VisualFrame, Variable } from '../../interpreter/types';
-import MemoryEngine from '../../interpreter/memory';
+import React, { useRef, useEffect } from 'react';
+import { MemoryTraceEntry, Variable } from '../../interpreter/types';
 
 interface MemoryStateSnapshot {
   memoryState: Map<number, any>;
