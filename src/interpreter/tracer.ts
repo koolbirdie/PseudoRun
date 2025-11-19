@@ -129,10 +129,15 @@ export class MemoryTracer {
   /**
    * Log address-of operation (&)
    */
-  logAddressOf(line: number, variable: string, address: number): void {
+  logAddressOf(line: number, variable: string, address: number, pointerAddress: number): void {
     this.addEntry('ADDRESS_OF', line, {
       variable,
-      address
+      address,
+      pointerAddress,
+      metadata: {
+        isPointerCreation: true,
+        targetVariable: variable
+      }
     });
   }
 
