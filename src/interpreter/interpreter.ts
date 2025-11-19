@@ -361,6 +361,8 @@ export class Interpreter {
       // Update memory if variable has a memory address
       if (variable.memoryAddress !== undefined) {
         this.memory.write(variable.memoryAddress, value);
+        // Log write operation
+        this.tracer.logWrite(node.line, variable.memoryAddress, value, varName);
       }
     } else if (node.target.type === 'ArrayAccess') {
       const arrayAccess = node.target as ArrayAccessNode;
