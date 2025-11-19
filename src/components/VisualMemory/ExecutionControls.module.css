@@ -1,0 +1,232 @@
+.controlsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.playbackControls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.controlButton {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+.controlButton:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+}
+
+.controlButton:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 123, 255, 0.3);
+}
+
+.controlButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.playButton {
+  background: #28a745;
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+}
+
+.playButton:hover:not(:disabled) {
+  background: #1e7e34;
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.4);
+}
+
+.pauseButton {
+  background: #ffc107;
+  box-shadow: 0 2px 4px rgba(255, 193, 7, 0.3);
+}
+
+.pauseButton:hover:not(:disabled) {
+  background: #e0a800;
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.4);
+}
+
+.resetButton {
+  background: #dc3545;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+}
+
+.resetButton:hover:not(:disabled) {
+  background: #c82333;
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.4);
+}
+
+.stepButton {
+  background: #17a2b8;
+  box-shadow: 0 2px 4px rgba(23, 162, 184, 0.3);
+}
+
+.stepButton:hover:not(:disabled) {
+  background: #138496;
+  box-shadow: 0 4px 8px rgba(23, 162, 184, 0.4);
+}
+
+.frameControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.frameSlider {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.frameLabel {
+  font-size: 14px;
+  font-weight: bold;
+  color: #495057;
+  text-align: center;
+}
+
+.slider {
+  width: 100%;
+  height: 6px;
+  background: #e9ecef;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #0056b3;
+  transform: scale(1.1);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.slider::-moz-range-thumb:hover {
+  background: #0056b3;
+  transform: scale(1.1);
+}
+
+.slider:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.speedControl {
+  position: relative;
+}
+
+.speedButton {
+  background: #6f42c1;
+  font-size: 12px;
+  padding: 8px 12px;
+  width: auto;
+  min-width: 80px;
+  box-shadow: 0 2px 4px rgba(111, 66, 193, 0.3);
+}
+
+.speedButton:hover:not(:disabled) {
+  background: #5a32a3;
+  box-shadow: 0 4px 8px rgba(111, 66, 193, 0.4);
+}
+
+.speedMenu {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 100%;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.speedOption {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background: white;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 12px;
+}
+
+.speedOption:hover {
+  background: #f8f9fa;
+}
+
+.speedOption.activeSpeed {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.executionInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #6c757d;
+  font-family: 'Courier New', monospace;
+}
+
+.infoText {
+  font-weight: 500;
+}
+
+.infoSeparator {
+  color: #ced4da;
+  font-weight: bold;
+}
