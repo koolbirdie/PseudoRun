@@ -180,7 +180,7 @@ const syntaxData: SyntaxItem[] = [
       {
         title: 'MALLOC',
         syntax: '<pointer_variable> <- MALLOC(<size_in_bytes>)',
-        example: 'DECLARE dynamicArray : POINTER_TO_INTEGER\ndeclare arraySize, elementSize : INTEGER\narraySize <- 10\nelementSize <- SIZE_OF(INTEGER)\ndynamicArray <- MALLOC(elementSize * arraySize)',
+        example: 'DECLARE dynamicArray : POINTER_TO_INTEGER\nDECLARE arraySize, elementSize : INTEGER\narraySize <- 10\nelementSize <- SIZE_OF(INTEGER)\ndynamicArray <- MALLOC(elementSize * arraySize)',
         description: 'Allocates dynamic memory and returns a pointer to the allocated block. Size must be specified in bytes.',
       },
       {
