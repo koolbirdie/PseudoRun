@@ -72,7 +72,7 @@ function App() {
 
   // Memory view state
   const [showMemoryView, setShowMemoryView] = useState(false);
-  const [memoryTrace] = useState<MemoryTraceEntry[]>([]);
+  const [memoryTrace, setMemoryTrace] = useState<MemoryTraceEntry[]>([]);
 
   // Guest mode auth modal state
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -151,11 +151,17 @@ function App() {
 
   // Handle run execution
   const handleRun = async () => {
+    console.log(`[App] handleRun method called! isRunning: ${isRunning}, errors: ${errors.length}`);
+
     // Check for syntax errors first
+    console.log(`[App] Checking for syntax errors - total errors: ${errors.length}`);
+    console.log(`[App] Errors details:`, errors);
     if (errors.length > 0 && errors.some(e => e.type === 'syntax')) {
+      console.log(`[App] Syntax errors found, blocking execution`);
       alert('Fix syntax errors before running');
       return;
     }
+    console.log(`[App] No syntax errors found, proceeding with execution`);
 
     // Clear output and errors
     setOutput([]);
@@ -166,8 +172,11 @@ function App() {
 
     try {
       // Tokenize and parse
+      console.log(`[App] Starting to tokenize and parse code:`, code);
       const tokens = tokenize(code);
+      console.log(`[App] Tokenization completed, got ${tokens.length} tokens`);
       const ast = parse(tokens);
+      console.log(`[App] Parsing completed, got AST:`, ast);
 
       // Create interpreter with custom input handler and file upload handler
       const interpreter = new Interpreter(
@@ -198,7 +207,9 @@ function App() {
       interpreterRef.current = interpreter;
 
       // Execute with animation
+      console.log(`[App] About to call interpreter.executeProgram with AST:`, ast);
       const generator = interpreter.executeProgram(ast);
+      console.log(`[App] Got generator, starting execution loop`);
 
       for await (const line of generator) {
         setOutput(prev => [...prev, line]);
@@ -210,9 +221,24 @@ function App() {
       const files = interpreter.getAllFiles();
       setCreatedFiles(files);
 
+      // Collect trace data from interpreter
+      const traceData = interpreter.getMemoryTracer().getTraceLog();
+      console.log(`[App] Collected ${traceData.length} trace entries`);
+      setMemoryTrace(traceData);
+
       setIsRunning(false);
       setWaitingForInput(false);
     } catch (error) {
+      // Collect trace data even when runtime errors occur
+      if (interpreterRef.current) {
+        try {
+          const traceData = interpreterRef.current.getMemoryTracer().getTraceLog();
+          setMemoryTrace(traceData);
+        } catch (traceError) {
+          // Ignore trace collection errors during runtime errors
+        }
+      }
+
       setIsRunning(false);
       setWaitingForInput(false);
 
@@ -357,7 +383,9 @@ function App() {
       interpreterRef.current = interpreter;
 
       // Execute with animation
+      console.log(`[App] About to call interpreter.executeProgram with AST:`, ast);
       const generator = interpreter.executeProgram(ast);
+      console.log(`[App] Got generator, starting execution loop`);
 
       for await (const line of generator) {
         setOutput(prev => [...prev, line]);
@@ -369,12 +397,27 @@ function App() {
       const files = interpreter.getAllFiles();
       setCreatedFiles(files);
 
+      // Collect trace data from interpreter
+      const traceData = interpreter.getMemoryTracer().getTraceLog();
+      console.log(`[App] Collected ${traceData.length} trace entries`);
+      setMemoryTrace(traceData);
+
       setIsRunning(false);
       setIsDebugging(false);
       setIsPaused(false);
       setDebugState(null);
       setWaitingForInput(false);
     } catch (error) {
+      // Collect trace data even when runtime errors occur
+      if (interpreterRef.current) {
+        try {
+          const traceData = interpreterRef.current.getMemoryTracer().getTraceLog();
+          setMemoryTrace(traceData);
+        } catch (traceError) {
+          // Ignore trace collection errors during runtime errors
+        }
+      }
+
       setIsRunning(false);
       setIsDebugging(false);
       setIsPaused(false);
@@ -400,6 +443,18 @@ function App() {
   const handleDebugStep = () => {
     if (stepResolveRef.current) {
       setIsPaused(false);
+
+      // Collect trace data after each step
+      if (interpreterRef.current) {
+        try {
+          const traceData = interpreterRef.current.getMemoryTracer().getTraceLog();
+          console.log(`[App Debug Step] Collected ${traceData.length} trace entries`);
+          setMemoryTrace(traceData);
+        } catch (traceError) {
+          console.error('[App Debug Step] Trace collection error:', traceError);
+        }
+      }
+
       stepResolveRef.current();
       stepResolveRef.current = null;
     }

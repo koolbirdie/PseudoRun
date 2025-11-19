@@ -44,6 +44,7 @@ export class MemoryTracer {
    * Log variable declaration
    */
   logDeclare(line: number, variable: string, address: number, type: string): void {
+    console.log(`[TRACE] DECLARE: line=${line}, variable=${variable}, address=${address}, type=${type}`);
     this.addEntry('DECLARE', line, {
       variable,
       address,
@@ -55,6 +56,7 @@ export class MemoryTracer {
    * Log memory write operation
    */
   logWrite(line: number, address: number, value: any, variable?: string): void {
+    console.log(`[TRACE] WRITE: line=${line}, address=${address}, value=${value}, variable=${variable || 'undefined'}`);
     this.addEntry('WRITE', line, {
       address,
       value,
@@ -96,6 +98,7 @@ export class MemoryTracer {
    * Log address-of operation (&)
    */
   logAddressOf(line: number, variable: string, address: number): void {
+    console.log(`[TRACE] ADDRESS_OF: line=${line}, variable=${variable}, address=${address}`);
     this.addEntry('ADDRESS_OF', line, {
       variable,
       address
@@ -291,6 +294,7 @@ export class MemoryTracer {
    * Get the complete trace log
    */
   getTraceLog(): MemoryTraceEntry[] {
+    console.log(`[TRACE] getTraceLog called, returning ${this.traceLog.length} entries`);
     return [...this.traceLog];
   }
 
