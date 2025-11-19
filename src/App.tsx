@@ -217,6 +217,16 @@ function App() {
       setIsRunning(false);
       setWaitingForInput(false);
     } catch (error) {
+      // Collect trace data even when runtime errors occur
+      if (interpreterRef.current) {
+        try {
+          const traceData = interpreterRef.current.getMemoryTracer().getTraceLog();
+          setMemoryTrace(traceData);
+        } catch (traceError) {
+          // Ignore trace collection errors during runtime errors
+        }
+      }
+
       setIsRunning(false);
       setWaitingForInput(false);
 
