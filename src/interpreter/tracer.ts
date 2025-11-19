@@ -144,10 +144,15 @@ export class MemoryTracer {
   /**
    * Log pointer dereference operation (*)
    */
-  logDereference(line: number, pointerAddress: number, value: any): void {
+  logDereference(line: number, pointerAddress: number, value: any, targetAddress: number): void {
     this.addEntry('DEREFERENCE', line, {
       pointerAddress,
-      value
+      value,
+      address: targetAddress,
+      metadata: {
+        isDereference: true,
+        targetAddress
+      }
     });
   }
 
