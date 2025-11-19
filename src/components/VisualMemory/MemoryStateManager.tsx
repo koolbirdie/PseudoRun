@@ -317,11 +317,7 @@ const MemoryStateManager: React.FC<MemoryStateManagerProps> = ({
     return state;
   };
 
-  // Expose the manager through ref for external use
-  React.useImperativeHandle(onStateUpdate, () => ({
-    getStateAtFrame,
-    getManager: () => managerRef.current
-  }));
+  // This component doesn't render anything - it's a utility
 
   return null;
 };
