@@ -122,6 +122,10 @@ export class Interpreter {
     return new Map(this.variableAddresses);
   }
 
+  public getMemoryTracer(): MemoryTracer {
+    return this.tracer;
+  }
+
   public getFileContent(filename: string): string | null {
     const fileHandle = this.fileHandles.get(filename);
     if (!fileHandle) {
