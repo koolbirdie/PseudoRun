@@ -544,6 +544,18 @@ function App() {
   // Handle memory view toggle
   const handleToggleMemoryView = () => {
     setShowMemoryView(!showMemoryView);
+    if (!showMemoryView && interpreterRef.current) {
+      // Update memory trace when opening memory view
+      const tracer = interpreterRef.current.getMemoryTracer();
+      if (tracer) {
+        setMemoryTrace(tracer.getTraceLog());
+      }
+    }
+  };
+
+  // Handle memory frame change
+  const handleMemoryFrameChange = (frame: number) => {
+    setCurrentDebugFrame(frame);
   };
 
   // Auto-save current program every 30 seconds
