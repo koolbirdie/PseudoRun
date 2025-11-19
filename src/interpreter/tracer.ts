@@ -56,6 +56,7 @@ export class MemoryTracer {
    * Log memory write operation
    */
   logWrite(line: number, address: number, value: any, variable?: string): void {
+    console.log(`[TRACE] WRITE: line=${line}, address=${address}, value=${value}, variable=${variable || 'undefined'}`);
     this.addEntry('WRITE', line, {
       address,
       value,
