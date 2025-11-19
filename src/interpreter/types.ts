@@ -346,7 +346,7 @@ export interface MemoryState {
 // Visual animation support
 export interface VisualFrame {
   frameNumber: number;
-  memoryState: Map<number, any>;
+  memoryState: Map<string, any>;
   variableAddresses: Map<string, number>;
   operations: MemoryTraceEntry[];
   timestamp: number;
