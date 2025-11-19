@@ -477,6 +477,8 @@ export class Interpreter {
       // Update memory if variable has a memory address
       if (variable.memoryAddress !== undefined) {
         this.memory.write(variable.memoryAddress, value);
+        // Log write operation for input
+        this.tracer.logWrite(node.line, variable.memoryAddress, value, varName);
       }
 
       // Echo the entered value to output
