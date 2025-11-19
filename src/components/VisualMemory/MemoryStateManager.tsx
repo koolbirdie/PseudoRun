@@ -12,7 +12,6 @@ interface MemoryStateSnapshot {
 interface MemoryStateManagerProps {
   traceLog: MemoryTraceEntry[];
   variables: Map<string, Variable>;
-  onStateUpdate?: (frame: number, state: MemoryStateSnapshot) => void;
 }
 
 // Utility class for managing memory states across frames
