@@ -298,7 +298,7 @@ export class MemoryStateManager {
 }
 
 // React component wrapper
-const MemoryStateManager: React.FC<MemoryStateManagerProps> = ({
+const MemoryStateManagerComponent: React.FC<MemoryStateManagerProps> = ({
   traceLog,
   variables,
   onStateUpdate
