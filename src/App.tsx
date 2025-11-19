@@ -435,9 +435,10 @@ function App() {
       if (interpreterRef.current) {
         try {
           const traceData = interpreterRef.current.getMemoryTracer().getTraceLog();
+          console.log(`[App Debug Step] Collected ${traceData.length} trace entries`);
           setMemoryTrace(traceData);
         } catch (traceError) {
-          // Ignore trace collection errors during stepping
+          console.error('[App Debug Step] Trace collection error:', traceError);
         }
       }
 
