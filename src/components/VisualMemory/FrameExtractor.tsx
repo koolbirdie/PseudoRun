@@ -103,23 +103,23 @@ export class FrameExtractor {
         // Read operations don't change state, but we can track reads for visualization
         if (operation.address !== undefined) {
           // Store read metadata if needed
-          memoryState.set(`${operation.address}_read_at`, operation.timestamp);
+          memoryMetadata.set(`${operation.address}_read_at`, operation.timestamp);
         }
         break;
 
       case 'ALLOCATE':
         if (operation.address !== undefined) {
           // Mark memory as allocated
-          memoryState.set(`${operation.address}_allocated`, true);
-          memoryState.set(`${operation.address}_size`, operation.metadata?.size || 1);
+          memoryMetadata.set(`${operation.address}_allocated`, true);
+          memoryMetadata.set(`${operation.address}_size`, operation.metadata?.size || 1);
         }
         break;
 
       case 'FREE':
         if (operation.address !== undefined) {
           // Clear allocated memory
-          memoryState.delete(`${operation.address}_allocated`);
-          memoryState.delete(`${operation.address}_size`);
+          memoryMetadata.delete(`${operation.address}_allocated`);
+          memoryMetadata.delete(`${operation.address}_size`);
           // Also clear the actual value
           memoryState.delete(operation.address);
         }
