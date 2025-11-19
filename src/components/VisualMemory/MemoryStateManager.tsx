@@ -214,14 +214,14 @@ export class MemoryStateManager {
       case 'READ':
         // Read operations don't change state but can be tracked for visualization
         if (operation.address !== undefined) {
-          memoryState.set(`${operation.address}_last_read`, operation.timestamp);
+          memoryMetadata.set(`${operation.address}_last_read`, operation.timestamp);
         }
         break;
 
       case 'DEREFERENCE':
         // Track dereference operations for visualization
         if (operation.pointerAddress !== undefined && operation.address !== undefined) {
-          memoryState.set(`${operation.pointerAddress}_last_deref`, operation.address);
+          memoryMetadata.set(`${operation.pointerAddress}_last_deref`, operation.address);
         }
         break;
     }
