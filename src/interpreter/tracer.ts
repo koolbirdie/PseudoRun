@@ -294,6 +294,7 @@ export class MemoryTracer {
    * Get the complete trace log
    */
   getTraceLog(): MemoryTraceEntry[] {
+    console.log(`[TRACE] getTraceLog called, returning ${this.traceLog.length} entries`);
     return [...this.traceLog];
   }
 
