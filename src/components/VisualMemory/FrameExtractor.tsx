@@ -1,3 +1,4 @@
+import React, { useRef, useEffect } from 'react';
 import { MemoryTraceEntry, VisualFrame } from '../../interpreter/types';
 
 interface FrameExtractorProps {
