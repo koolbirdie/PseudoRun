@@ -10,11 +10,13 @@ export class MemoryTracer {
   private traceLog: MemoryTraceEntry[];
   private stepCounter: number;
   private startTime: number;
+  private variableStates: Map<string, any>; // Track variable states for visual diff
 
   constructor() {
     this.traceLog = [];
     this.stepCounter = 0;
     this.startTime = Date.now();
+    this.variableStates = new Map();
   }
 
   /**
