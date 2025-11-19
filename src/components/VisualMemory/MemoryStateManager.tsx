@@ -311,8 +311,6 @@ const MemoryStateManagerComponent: React.FC<MemoryStateManagerProps> = ({
 
   // This component doesn't render anything - it's a utility
 
-  // This component doesn't render anything - it's a utility
-
   return null;
 };
 
