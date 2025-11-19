@@ -342,3 +342,32 @@ export interface MemoryState {
   allocations: Array<{ address: number; size: number; type: string; variable?: string }>;
   trace: MemoryTraceEntry[];
 }
+
+// Visual animation support
+export interface VisualFrame {
+  frameNumber: number;
+  memoryState: Map<number, any>;
+  variableAddresses: Map<string, number>;
+  operations: MemoryTraceEntry[];
+  timestamp: number;
+}
+
+export interface AnimationEvent {
+  type: 'CREATE' | 'UPDATE' | 'DELETE' | 'HIGHLIGHT' | 'ARROW_MOVE';
+  target: 'MEMORY_CELL' | 'POINTER_ARROW' | 'ARRAY_BLOCK';
+  address?: number;
+  variable?: string;
+  fromValue?: any;
+  toValue?: any;
+  duration: number;
+  easing: 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
+}
+
+export interface PointerVisualization {
+  variableName: string;
+  pointerAddress: number;
+  targetAddress: number;
+  pointerType: DataType;
+  color: string;
+  curve: 'straight' | 'curved';
+}
