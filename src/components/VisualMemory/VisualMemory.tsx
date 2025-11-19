@@ -36,7 +36,6 @@ interface MemoryCell {
 }
 
 const VisualMemory: React.FC<VisualMemoryProps> = ({
-  memory,
   variableAddresses,
   traceLog,
   variables,
