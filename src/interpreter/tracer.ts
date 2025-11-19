@@ -74,7 +74,6 @@ export class MemoryTracer {
   /**
    * Log memory write operation
    */
-<<<<<<< HEAD
   logWrite(line: number, address: number, value: any, variable?: string, oldValue?: any): void {
     const metadata: any = {};
     if (oldValue !== undefined) {
@@ -89,10 +88,6 @@ export class MemoryTracer {
       this.variableStates.set(variable, value);
     }
 
-=======
-  logWrite(line: number, address: number, value: any, variable?: string): void {
-    console.log(`[TRACE] WRITE: line=${line}, address=${address}, value=${value}, variable=${variable || 'undefined'}`);
->>>>>>> main
     this.addEntry('WRITE', line, {
       address,
       value,
