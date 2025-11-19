@@ -7,7 +7,6 @@ import ExecutionControls from './ExecutionControls';
 import styles from './VisualMemory.module.css';
 
 interface VisualMemoryProps {
-  memory: MemoryEngine;
   variableAddresses: Map<string, number>;
   traceLog: MemoryTraceEntry[];
   variables: Map<string, Variable>;
