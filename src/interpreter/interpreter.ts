@@ -1701,7 +1701,7 @@ export class Interpreter {
       console.log(`Final calculated address:`, finalAddress);
 
       // Log address-of operation for array element
-      this.tracer.logAddressOf(node.line, `${arrayAccess.array}[${indexValue}]`, finalAddress);
+      this.tracer.logAddressOf(node.line, `${arrayAccess.array}[${indexValue}]`, finalAddress, finalAddress);
       return finalAddress;
     } else {
       throw new RuntimeError(`Invalid address-of target type`, node.line);
