@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { MemoryTraceEntry, Variable } from '../../interpreter/types';
 
 interface MemoryStateSnapshot {
-  memoryState: Map<number, any>;
+  memoryState: Map<string, any>;
   variableAddresses: Map<string, number>;
   variables: Map<string, Variable>;
   allocations: Array<{ address: number; size: number; type: string; variable?: string }>;
