@@ -1,3 +1,4 @@
+import React, { useRef, useEffect, useImperativeHandle } from 'react';
 import { MemoryTraceEntry, VisualFrame, Variable } from '../../interpreter/types';
 import MemoryEngine from '../../interpreter/memory';
 
