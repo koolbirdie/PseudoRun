@@ -79,17 +79,19 @@ export class MemoryStateManager {
     toFrame: number
   ): MemoryStateSnapshot {
     const memoryState = new Map(startState.memoryState);
+    const memoryMetadata = new Map(startState.memoryMetadata);
     const variableAddresses = new Map(startState.variableAddresses);
     const allocations = [...startState.allocations];
     const variables = new Map(startState.variables);
 
     for (let i = fromFrame; i <= toFrame && i < this.traceLog.length; i++) {
       const operation = this.traceLog[i];
-      this.processOperation(operation, memoryState, variableAddresses, allocations, variables);
+      this.processOperation(operation, memoryState, memoryMetadata, variableAddresses, allocations, variables);
     }
 
     return {
       memoryState,
+      memoryMetadata,
       variableAddresses,
       variables,
       allocations
