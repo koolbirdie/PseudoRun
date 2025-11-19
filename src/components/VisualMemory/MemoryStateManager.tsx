@@ -262,6 +262,7 @@ export class MemoryStateManager {
 
     this.stateCache.set(frameNumber, {
       memoryState: new Map(state.memoryState),
+      memoryMetadata: new Map(state.memoryMetadata),
       variableAddresses: new Map(state.variableAddresses),
       variables: new Map(state.variables),
       allocations: [...state.allocations]
