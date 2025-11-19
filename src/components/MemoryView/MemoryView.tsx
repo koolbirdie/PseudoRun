@@ -161,7 +161,6 @@ export default function MemoryView({
         {activeTab === 'visual' && (
           <div className={styles.visualTab}>
             <VisualMemory
-              memory={memory}
               variableAddresses={variableAddresses}
               traceLog={traceLog}
               variables={variables}
