@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { MemoryTraceEntry, AnimationEvent, VisualFrame } from '../../interpreter/types';
+import { MemoryTraceEntry, AnimationEvent } from '../../interpreter/types';
 
 interface AnimationManagerProps {
   traceLog: MemoryTraceEntry[];
