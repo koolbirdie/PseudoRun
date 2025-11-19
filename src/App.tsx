@@ -401,6 +401,7 @@ function App() {
   const handleDebugStep = () => {
     if (stepResolveRef.current) {
       setIsPaused(false);
+      setCurrentDebugFrame(prev => prev + 1);
       stepResolveRef.current();
       stepResolveRef.current = null;
     }
