@@ -644,6 +644,10 @@ function App() {
               memory={interpreterRef.current.getMemoryEngine()}
               variableAddresses={interpreterRef.current.getVariableAddresses()}
               traceLog={memoryTrace}
+              variables={debugState?.variables}
+              debugState={debugState}
+              currentFrame={currentDebugFrame}
+              onFrameChange={handleMemoryFrameChange}
             />
           )}
 
