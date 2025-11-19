@@ -44,6 +44,7 @@ export class MemoryTracer {
    * Log variable declaration
    */
   logDeclare(line: number, variable: string, address: number, type: string): void {
+    console.log(`[TRACE] DECLARE: line=${line}, variable=${variable}, address=${address}, type=${type}`);
     this.addEntry('DECLARE', line, {
       variable,
       address,
