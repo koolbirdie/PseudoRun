@@ -209,7 +209,7 @@ export class FrameExtractor {
 }
 
 // React component wrapper
-const FrameExtractorComponent: React.FC<FrameExtractorProps> = ({
+export const FrameExtractorComponent: React.FC<FrameExtractorProps> = ({
   traceLog,
   onFramesExtracted
 }) => {
@@ -228,5 +228,3 @@ const FrameExtractorComponent: React.FC<FrameExtractorProps> = ({
   // This component doesn't render anything - it's a utility
   return null;
 };
-
-export default FrameExtractorComponent;
