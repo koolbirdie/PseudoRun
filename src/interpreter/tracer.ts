@@ -45,7 +45,6 @@ export class MemoryTracer {
   /**
    * Log variable declaration
    */
-<<<<<<< HEAD
   logDeclare(line: number, variable: string, address: number, type: string, variableData?: Variable): void {
     const isArray = type === 'ARRAY';
     let metadata: any = { type, isArray };
@@ -64,10 +63,6 @@ export class MemoryTracer {
       };
     }
 
-=======
-  logDeclare(line: number, variable: string, address: number, type: string): void {
-    console.log(`[TRACE] DECLARE: line=${line}, variable=${variable}, address=${address}, type=${type}`);
->>>>>>> main
     this.addEntry('DECLARE', line, {
       variable,
       address,
