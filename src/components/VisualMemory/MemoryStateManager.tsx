@@ -309,13 +309,7 @@ const MemoryStateManagerComponent: React.FC<MemoryStateManagerProps> = ({
     managerRef.current = new MemoryStateManager(traceLog, variables);
   }, [traceLog, variables]);
 
-  // Method to get state at a specific frame
-  const getStateAtFrame = (frameNumber: number): MemoryStateSnapshot | null => {
-    if (!managerRef.current) return null;
-    const state = managerRef.current.getStateAtFrame(frameNumber);
-    onStateUpdate?.(frameNumber, state);
-    return state;
-  };
+  // This component doesn't render anything - it's a utility
 
   // This component doesn't render anything - it's a utility
 
