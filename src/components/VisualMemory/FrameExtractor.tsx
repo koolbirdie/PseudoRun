@@ -209,7 +209,7 @@ export class FrameExtractor {
 }
 
 // React component wrapper
-const FrameExtractor: React.FC<FrameExtractorProps> = ({
+const FrameExtractorComponent: React.FC<FrameExtractorProps> = ({
   traceLog,
   onFramesExtracted
 }) => {
