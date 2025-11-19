@@ -159,10 +159,16 @@ export class MemoryTracer {
   /**
    * Log pointer assignment
    */
-  logPointerAssign(line: number, variable: string, address: number): void {
+  logPointerAssign(line: number, variable: string, address: number, pointerAddress: number, oldTarget?: number): void {
     this.addEntry('POINTER_ASSIGN', line, {
       variable,
-      address
+      address,
+      pointerAddress,
+      metadata: {
+        oldTarget,
+        isNewTarget: oldTarget !== address,
+        isPointerReassignment: oldTarget !== undefined
+      }
     });
   }
 
