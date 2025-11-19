@@ -529,6 +529,15 @@ export class Interpreter {
 
       this.setArrayElement(variable.value, indices, value, variable.dimensions!, node.line);
 
+      // Log array element input operation
+      const baseAddress = this.variableAddresses.get(arrayAccess.array);
+      if (baseAddress !== undefined) {
+        const elementSize = this.memory.getTypeSize(variable.elementType || 'INTEGER');
+        const index = indices[0]; // Simplified for single dimension
+        const elementAddress = baseAddress + index * elementSize;
+        this.tracer.logWrite(node.line, elementAddress, value, `${arrayAccess.array}[${index}]`);
+      }
+
       // Echo the entered value to output
       yield input;
     } else if ((node.target as any).type === 'Dereference') {
