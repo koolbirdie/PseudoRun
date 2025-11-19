@@ -5,13 +5,18 @@
 
 import { useState, useMemo } from 'react';
 import { MemoryEngine } from '../../interpreter/memory';
-import { MemoryTraceEntry } from '../../interpreter/types';
+import { MemoryTraceEntry, Variable, DebugState } from '../../interpreter/types';
+import VisualMemory from '../VisualMemory/VisualMemory';
 import styles from './MemoryView.module.css';
 
 interface MemoryViewProps {
   memory: MemoryEngine;
   variableAddresses: Map<string, number>;
   traceLog: MemoryTraceEntry[];
+  variables?: Map<string, Variable>;
+  debugState?: DebugState | null;
+  currentFrame?: number;
+  onFrameChange?: (frame: number) => void;
 }
 
 interface VariableInfo {
