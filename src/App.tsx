@@ -444,9 +444,7 @@ function App() {
   const handleDebugStep = () => {
     if (stepResolveRef.current) {
       setIsPaused(false);
-<<<<<<< HEAD
       setCurrentDebugFrame(prev => prev + 1);
-=======
 
       // Collect trace data after each step
       if (interpreterRef.current) {
@@ -459,7 +457,6 @@ function App() {
         }
       }
 
->>>>>>> main
       stepResolveRef.current();
       stepResolveRef.current = null;
     }
