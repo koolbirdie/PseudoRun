@@ -39,7 +39,7 @@ export default function MemoryView({
   const [memoryStart, setMemoryStart] = useState(1024);
 
   // Process variable information
-  const variables: VariableInfo[] = useMemo(() => {
+  const variableInfo: VariableInfo[] = useMemo(() => {
     const vars: VariableInfo[] = [];
 
     for (const [name, address] of variableAddresses.entries()) {
