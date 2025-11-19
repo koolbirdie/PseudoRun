@@ -279,6 +279,10 @@ export class Interpreter {
       // Handle pointer types - allocate memory for storing address
       const address = this.memory.allocate(1, node.dataType);
       this.variableAddresses.set(node.identifier, address);
+
+      // Log pointer declaration
+      this.tracer.logDeclare(node.line, node.identifier, address, node.dataType);
+
       context.variables.set(node.identifier, {
         type: node.dataType,
         value: 0, // Initialize to null pointer (address 0)
