@@ -1431,7 +1431,10 @@ export class Interpreter {
     // Read from memory if variable has a memory address
     if (variable.memoryAddress !== undefined) {
       try {
-        return this.memory.read(variable.memoryAddress);
+        const value = this.memory.read(variable.memoryAddress);
+        // Log read operation
+        this.tracer.logRead(node.line, variable.memoryAddress, value, node.name);
+        return value;
       } catch (error) {
         throw new RuntimeError(`Memory read error for variable '${node.name}': ${(error as Error).message}`, node.line);
       }
