@@ -77,6 +77,14 @@
   flex-direction: column;
 }
 
+/* Visual Memory Tab */
+.visualTab {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Variables Tab */
 .variablesTab {
   flex: 1;
