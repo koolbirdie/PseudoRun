@@ -329,15 +329,6 @@ export class MemoryTracer {
   }
 
   /**
-   * Clear the trace log
-   */
-  clear(): void {
-    this.traceLog = [];
-    this.stepCounter = 0;
-    this.startTime = Date.now();
-  }
-
-  /**
    * Get the complete trace log
    */
   getTraceLog(): MemoryTraceEntry[] {
