@@ -429,7 +429,8 @@ function App() {
     setIsPaused(false);
     setIsRunning(false);
     setDebugState(null);
-    
+    setCurrentDebugFrame(0);
+
     // This will cause the execution to complete
     if (stepResolveRef.current) {
       stepResolveRef.current();
