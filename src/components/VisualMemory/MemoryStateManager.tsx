@@ -50,7 +50,8 @@ export class MemoryStateManager {
     // If no cached state found, start from scratch
     if (!startState) {
       startState = {
-        memoryState: new Map<string, any>(),
+        memoryState: new Map<number, any>(),
+        memoryMetadata: new Map<string, any>(),
         variableAddresses: new Map<string, number>(),
         variables: new Map(this.variables),
         allocations: []
