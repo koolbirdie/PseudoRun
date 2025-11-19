@@ -74,11 +74,25 @@ export class MemoryTracer {
   /**
    * Log memory write operation
    */
-  logWrite(line: number, address: number, value: any, variable?: string): void {
+  logWrite(line: number, address: number, value: any, variable?: string, oldValue?: any): void {
+    const metadata: any = {};
+    if (oldValue !== undefined) {
+      metadata.oldValue = oldValue;
+      metadata.valueChanged = oldValue !== value;
+    }
+
+    // Track variable state for animation
+    if (variable) {
+      const oldState = this.variableStates.get(variable);
+      metadata.oldVariableState = oldState;
+      this.variableStates.set(variable, value);
+    }
+
     this.addEntry('WRITE', line, {
       address,
       value,
-      variable
+      variable,
+      metadata
     });
   }
 
